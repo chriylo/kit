@@ -49,13 +49,13 @@ public class Test5 {
 		TypePredictor predictor = new TypePredictor();
 		
 				
-		//testHaploidScaled(predictor);
+		testHaploidScaled(predictor);
 		//testHaploidSimulated(predictor, pathToReads);
 		//testHaploidSimulated(predictor, pathToReads2);
 		//testDiploidScaled(predictor);
 		//testDiploidSimulated(predictor, pathToReads, pathToReads2);
 		//testTrios(predictor, pathToTrios);
-		test1k(predictor, pathTo1k);
+		//test1k(predictor, pathTo1k);
 		
 		//mainHelper(5);
 		//mainHelper(15);

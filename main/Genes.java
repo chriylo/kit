@@ -32,6 +32,9 @@ public class Genes {
 //		typeCopyNumbers.put("Bdel",new int[] {1,1,0,1,1,1,0,0,1,1,1,0,1,0});
 //		typeCopyNumbers.put("B",new int[] {1,1,0,1,2,2,1,1,1,1,1,0,1,0});
 		
+		
+		
+		
 		ArrayList<String> geneNames = new ArrayList<String>(); 
 		geneNames.add("KIR3DL3");
 		geneTests.add(geneNames);
@@ -91,6 +94,86 @@ public class Genes {
 		geneNames = new ArrayList<String>(); 
 		geneNames.add("KIR3DL2");
 		geneTests.add(geneNames);
+		
+//		//Classical genes
+//		typeCopyNumbers = new HashMap<String, int[]>();
+//		typeCopyNumbers.put("A", new int[] 	{1,0,1,0,0,1,1,1,1,1,0,0,1,1});
+//		typeCopyNumbers.put("AB",new int[] 	{1,0,1,0,0,1,1,1,1,1,1,1,0,1});
+//		typeCopyNumbers.put("BA1",new int[] {1,1,1,0,0,0,0,1,1,1,0,0,1,1});
+//		typeCopyNumbers.put("BA2X",new int[]{1,0,1,1,1,1,1,1,1,1,0,0,1,1});
+//		typeCopyNumbers.put("BA2",new int[] {1,1,1,1,1,1,1,1,1,1,0,0,1,1});
+//		typeCopyNumbers.put("Bdel",new int[]{1,1,1,0,0,0,0,1,1,1,1,1,0,1});
+//		typeCopyNumbers.put("B",new int[] 	{1,1,1,1,2,1,1,1,1,1,1,1,0,1});
+//		
+//		ArrayList<String> geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR3DL3");
+//		geneTests.add(geneNames);
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR2DS2");
+//		geneTests.add(geneNames);
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR2DL3"); 	geneNames.add("KIR2DL2"); 
+//		geneTests.add(geneNames);
+//		
+////		geneNames = new ArrayList<String>(); 
+////		geneNames.add("KIR2DL2"); 
+////		geneTests.add(geneNames);
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR2DL5B"); //geneNames.add("KIR2DL5A");
+//		geneTests.add(geneNames);
+//		
+//		
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR2DS3B"); geneNames.add("KIR2DS3A");		geneNames.add("KIR2DS5A"); geneNames.add("KIR2DS5B");
+//		geneTests.add(geneNames);
+//		
+////		geneNames = new ArrayList<String>(); 
+////		geneNames.add("KIR2DS5A"); geneNames.add("KIR2DS5B");
+////		geneTests.add(geneNames);
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR2DP1");
+//		geneTests.add(geneNames);
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR2DL1");
+//		geneTests.add(geneNames);
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR3DP1");
+//		geneTests.add(geneNames);
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR2DL4");
+//		geneTests.add(geneNames);
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR3DS1"); 		geneNames.add("KIR3DL1");
+//		geneTests.add(geneNames);
+//		
+////		geneNames = new ArrayList<String>(); 
+////		geneNames.add("KIR3DL1");
+////		geneTests.add(geneNames);
+//		
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR2DL5A");
+//		geneTests.add(geneNames);
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR2DS1");
+//		geneTests.add(geneNames);
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR2DS4");
+//		geneTests.add(geneNames);
+//
+//		geneNames = new ArrayList<String>(); 
+//		geneNames.add("KIR3DL2");
+//		geneTests.add(geneNames);
 		
 		generateDiploid();
 	}

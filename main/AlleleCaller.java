@@ -33,7 +33,7 @@ public class AlleleCaller {
 		
 		//filterReads(params);
 		//preprocess(params); 
-		callAllele(params);
+		//callAllele(params);
 		//callAlleleFromPileupFile(params);
 		
 		//getVCFGene(params);
@@ -367,16 +367,16 @@ public class AlleleCaller {
 	
 	
 	public static void getVCF(Params2 params) throws IOException {
-		String pathToDir = params.o;
-		String pathToCN = params.cn;
+//		String pathToDir = params.o;
+//		String pathToCN = params.cn;
 		
 		//get samples cn 
-		HashMap<String, int[]> samplesCN = getVCFSampleCNFromCNFile(pathToCN);
+//		HashMap<String, int[]> samplesCN = getVCFSampleCNFromCNFile(pathToCN);
 		
 		ArrayList<String> samples = new ArrayList<String>();
-		for (Iterator scnit = samplesCN.keySet().iterator(); scnit.hasNext(); ) {
-			samples.add((String) scnit.next());
-		}
+//		for (Iterator scnit = samplesCN.keySet().iterator(); scnit.hasNext(); ) {
+//			samples.add((String) scnit.next());
+//		}
 		
 		//get offset
 		ArrayList<Integer> offset = getVCFOffset();
@@ -391,17 +391,18 @@ public class AlleleCaller {
 		System.out.println("##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">");
 		System.out.println("##FORMAT=<ID=PL,Number=G,Type=Integer,Description=\"List of Phred-scaled genotype likelihoods\">");
 		System.out.print("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT");
-		for (Iterator it2 = samplesCN.keySet().iterator(); it2.hasNext(); ) {
-			String sample = (String) it2.next();				
-			File f = new File(pathToDir +  "0." + sample + ".debug");
-			if (!f.exists()) { continue; }
-			System.out.print("\t"+sample);
-		} System.out.println();
-		
+//		for (Iterator it2 = samplesCN.keySet().iterator(); it2.hasNext(); ) {
+//			String sample = (String) it2.next();				
+//			File f = new File(pathToDir +  "0." + sample + ".debug");
+//			if (!f.exists()) { continue; }
+//			System.out.print("\t"+sample);
+//		} System.out.println();
+//		
 		//for each gene
 		for (int geneIndex = 0; geneIndex < Genes.getGeneTests().size(); ++geneIndex) {
-			System.out.println("*******\t" + geneIndex + "\t***********");
-			AlleleScorer a = new AlleleScorer(geneIndex, "sample", pathToDir);
+//			System.out.println("*******\t" + geneIndex + "\t***********");
+//			AlleleScorer a = new AlleleScorer(geneIndex, "sample", pathToDir);
+			AlleleScorer a = new AlleleScorer(geneIndex); //remove
 			a.loadAllele(allGeneReference.get(geneIndex), allGeneAlleles.get(geneIndex));
 
 			HashMap<Integer, Variant> geneReferenceVariants = a.getReferenceAllele().getVariants();
@@ -418,63 +419,63 @@ public class AlleleCaller {
 			
 			
 			//for each sample
-			for (Iterator it2 = samplesCN.keySet().iterator(); it2.hasNext(); ) {
-				String sample = (String) it2.next();				
-				File f = new File(pathToDir +  "0." + sample + ".debug");
-				if (!f.exists()) { continue; }
-				
-				
-				int[] sampleCN = samplesCN.get(sample);
-				//System.out.println(sample);
-				
-				
-				//if cn == 0
-				if (sampleCN[geneIndex]==0 || sampleCN[geneIndex]>2) {
-					for (Iterator it = geneReferenceVariants.keySet().iterator(); it.hasNext(); ) {
-						Integer pos = (Integer) it.next();
-						
-						ProbabilityLikelihoodGeneral pl;
-						if (sampleCN[geneIndex]==0) {
-							pl = new ProbabilityLikelihoodGeneral(geneVariantsGeneral.get(pos).getRef(), geneVariantsGeneral.get(pos).getAlt(), new ArrayList<String>(), 0);
-						} else {
-							pl = new ProbabilityLikelihoodGeneral(geneVariantsGeneral.get(pos).getRef(), geneVariantsGeneral.get(pos).getAlt(), new ArrayList<String>(), 3);
-						}
-						pl.normalize();
-						
-						geneVariantsGeneral.get(pos).addSample(sample, pl);
-					}
-				} 
-				
-				else { 
-					BufferedReader br = new BufferedReader(new FileReader(pathToDir + geneIndex + "." + sample + ".debug"));
-					String vcfLine;
-					while (((vcfLine = br.readLine()) != null) && (!vcfLine.startsWith("KIR"))) { //EOF or no more new pileups
-						String[] vcfLineSplit = vcfLine.split("\t");
-						Integer vcfVarPosition = Integer.valueOf(vcfLineSplit[0]);
-						if (!geneVariantsGeneral.containsKey(vcfVarPosition)) { break; } //not novel
-	
-						String pileup = vcfLineSplit[3];
-						pileup = pileup.substring(1,pileup.length()-1);
-						String[] pileupArray = pileup.split(", ");
-						if (pileupArray.length == 1) { if (pileupArray[0].equals("")) {pileupArray = new String[0]; } }
-						ArrayList<String> pc = new ArrayList<String>();
-						for (int p = 0; p < pileupArray.length; ++p) { pc.add(pileupArray[p]); }
-						
-						ProbabilityLikelihoodGeneral pl;
-						String refTemp = geneVariantsGeneral.get(vcfVarPosition).getRef();
-						ArrayList<String> altTemp = geneVariantsGeneral.get(vcfVarPosition).getAlt();
-						if (sampleCN[geneIndex]==1) {
-						pl = new ProbabilityLikelihoodGeneral(refTemp, altTemp, pc, 1 ); //TODO: get pl
-						} else{
-						pl = new ProbabilityLikelihoodGeneral(refTemp, altTemp, pc, 2 ); //TODO: get pl
-						}
-						pl.normalize();
-						
-						geneVariantsGeneral.get(vcfVarPosition).addSample(sample, pl);
-					}
-					br.close();
-				}
-			}
+//			for (Iterator it2 = samplesCN.keySet().iterator(); it2.hasNext(); ) {
+//				String sample = (String) it2.next();				
+//				File f = new File(pathToDir +  "0." + sample + ".debug");
+//				if (!f.exists()) { continue; }
+//				
+//				
+//				int[] sampleCN = samplesCN.get(sample);
+//				//System.out.println(sample);
+//				
+//				
+//				//if cn == 0
+//				if (sampleCN[geneIndex]==0 || sampleCN[geneIndex]>2) {
+//					for (Iterator it = geneReferenceVariants.keySet().iterator(); it.hasNext(); ) {
+//						Integer pos = (Integer) it.next();
+//						
+//						ProbabilityLikelihoodGeneral pl;
+//						if (sampleCN[geneIndex]==0) {
+//							pl = new ProbabilityLikelihoodGeneral(geneVariantsGeneral.get(pos).getRef(), geneVariantsGeneral.get(pos).getAlt(), new ArrayList<String>(), 0);
+//						} else {
+//							pl = new ProbabilityLikelihoodGeneral(geneVariantsGeneral.get(pos).getRef(), geneVariantsGeneral.get(pos).getAlt(), new ArrayList<String>(), 3);
+//						}
+//						pl.normalize();
+//						
+//						geneVariantsGeneral.get(pos).addSample(sample, pl);
+//					}
+//				} 
+//				
+//				else { 
+//					BufferedReader br = new BufferedReader(new FileReader(pathToDir + geneIndex + "." + sample + ".debug"));
+//					String vcfLine;
+//					while (((vcfLine = br.readLine()) != null) && (!vcfLine.startsWith("KIR"))) { //EOF or no more new pileups
+//						String[] vcfLineSplit = vcfLine.split("\t");
+//						Integer vcfVarPosition = Integer.valueOf(vcfLineSplit[0]);
+//						if (!geneVariantsGeneral.containsKey(vcfVarPosition)) { break; } //not novel
+//	
+//						String pileup = vcfLineSplit[3];
+//						pileup = pileup.substring(1,pileup.length()-1);
+//						String[] pileupArray = pileup.split(", ");
+//						if (pileupArray.length == 1) { if (pileupArray[0].equals("")) {pileupArray = new String[0]; } }
+//						ArrayList<String> pc = new ArrayList<String>();
+//						for (int p = 0; p < pileupArray.length; ++p) { pc.add(pileupArray[p]); }
+//						
+//						ProbabilityLikelihoodGeneral pl;
+//						String refTemp = geneVariantsGeneral.get(vcfVarPosition).getRef();
+//						ArrayList<String> altTemp = geneVariantsGeneral.get(vcfVarPosition).getAlt();
+//						if (sampleCN[geneIndex]==1) {
+//						pl = new ProbabilityLikelihoodGeneral(refTemp, altTemp, pc, 1 ); //TODO: get pl
+//						} else{
+//						pl = new ProbabilityLikelihoodGeneral(refTemp, altTemp, pc, 2 ); //TODO: get pl
+//						}
+//						pl.normalize();
+//						
+//						geneVariantsGeneral.get(vcfVarPosition).addSample(sample, pl);
+//					}
+//					br.close();
+//				}
+//			}
 			
 			
 			
@@ -497,24 +498,27 @@ public class AlleleCaller {
 				
 				else {
 				if (sampleVariant.getOffset() < 0) { 
-					System.out.print("chr19\t"+String.valueOf(-sampleVariant.getOffset()+counter)+"\t"+String.valueOf(-sampleVariant.getOffset()+counter)+"\t"+sampleVariant.getRef()+"\t"+sampleVariant.getAltStr()+"\t.\t.\t.\tGT:PL");
+					System.out.println(varPos + "\t" + -sampleVariant.getOffset() + "\t" +  (-sampleVariant.getOffset()+counter));
+					//System.out.print("chr19\t"+String.valueOf(-sampleVariant.getOffset()+counter)+"\t"+String.valueOf(-sampleVariant.getOffset()+counter)+"\t"+sampleVariant.getRef()+"\t"+sampleVariant.getAltStr()+"\t.\t.\t.\tGT:PL");
 					counter += 1;
 				} 
 				else {
-					System.out.print("chr19\t"+String.valueOf(sampleVariant.getOffset()+varPos)+"\t"+String.valueOf(sampleVariant.getOffset()+varPos)+"\t"+sampleVariant.getRef()+"\t"+sampleVariant.getAltStr()+"\t.\t.\t.\tGT:PL");
+					System.out.println(varPos + "\t" + sampleVariant.getOffset() + "\t" +  (sampleVariant.getOffset()+varPos));
+
+					//System.out.print("chr19\t"+String.valueOf(sampleVariant.getOffset()+varPos)+"\t"+String.valueOf(sampleVariant.getOffset()+varPos)+"\t"+sampleVariant.getRef()+"\t"+sampleVariant.getAltStr()+"\t.\t.\t.\tGT:PL");
 				}
 				
-				for (Iterator it3 = samplesCN.keySet().iterator(); it3.hasNext(); ) {
-					String sample = (String) it3.next();				
-					File f = new File(pathToDir +  "0." + sample + ".debug");
-					if (!f.exists()) { continue; }
-					
-					ProbabilityLikelihoodGeneral pl = samplesPl.get(sample);
-					if (pl == null) {System.out.println(); System.out.println(sample); }
-					System.out.print("\t" +  pl.getGenotype() + ":" + pl.toString());
-
-				}
-				System.out.println();
+//				for (Iterator it3 = samplesCN.keySet().iterator(); it3.hasNext(); ) {
+//					String sample = (String) it3.next();				
+//					File f = new File(pathToDir +  "0." + sample + ".debug");
+//					if (!f.exists()) { continue; }
+//					
+//					ProbabilityLikelihoodGeneral pl = samplesPl.get(sample);
+//					if (pl == null) {System.out.println(); System.out.println(sample); }
+//					System.out.print("\t" +  pl.getGenotype() + ":" + pl.toString());
+//
+//				}
+//				System.out.println();
 				}
 
  			}
@@ -525,8 +529,109 @@ public class AlleleCaller {
 	}
 	
 	public static void getVCFType(Params2 params) throws IOException {
-		
-		
+//		//Input: .out file for each sample and for each gene
+//		String pathToDir = params.o;
+//		String pathToCN = params.cn;
+//				
+//		HashMap<String, int[]> samplesCN = getVCFSampleCNFromCNFile(pathToCN);
+//		ArrayList<String> samples = new ArrayList<String>();
+//		for (Iterator scnit = samplesCN.keySet().iterator(); scnit.hasNext(); ) {
+//			samples.add((String) scnit.next());
+//		}
+//				
+//		ArrayList<Integer> offset = getVCFOffset();
+//				
+//								
+//		//Print header
+//		System.out.println("##fileformat=VCFv4.1");
+//		System.out.println("##reference=chr19.b36.fa");
+//		System.out.println("##contig=<ID=chr19,length=63811651,assembly=B36,species=\"Homo sapiens\">");
+//		System.out.println("##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">");
+//		System.out.println("##FORMAT=<ID=PL,Number=G,Type=Integer,Description=\"List of Phred-scaled genotype likelihoods\">");
+//		System.out.print("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT");
+//
+//			
+//		//For each gene
+//		HashMap<Integer, VCFVariantGeneral> geneVariantsGeneral = new HashMap<Integer, VCFVariantGeneral>();
+//
+//		for (int geneIndex = 0; geneIndex < Genes.getGeneTests().size(); ++geneIndex) {
+//			Integer pos = Math.abs(offset.get(geneIndex));
+//			ArrayList<String> altVariants = new ArrayList<String>();
+//			HashMap<String, Allele> geneAlleles = allGeneAlleles.get(geneIndex);
+//			for (Iterator it = geneAlleles.keySet().iterator(); it.hasNext(); ) {
+//				String alleleName = getAlleleName((String) it.next(), resolution);
+//				if (!altVariants.contains(alleleName)) { altVariants.add(alleleName); }
+//			}
+//			altVariants.add("D");
+//			String refVariant = altVariants.get(0);
+//			altVariants.remove(0);
+//			geneVariantsGeneral.put(pos, new VCFVariantGeneral("ref", pos, 0, refVariant, altVariants)); 
+//					
+//			//For all samples
+//			for (Iterator it2 = samplesCN.keySet().iterator(); it2.hasNext(); ) {
+//						String sample = (String) it2.next();				
+//						File f = new File(pathToDir +  "0." + sample + ".debug");
+//						if (!f.exists()) { continue; }
+//						
+//						int[] sampleCN = samplesCN.get(sample);
+//						
+//						//Read corresponding input file (Hashmap for allele pair and score)
+//						
+//						HashMap<Integer, Integer> alleleScores = getAlleleScores(resolution, pathToDir, geneIndex, refVariant,  altVariants, sample, sampleCN[geneIndex]);
+//						ProbabilityLikelihoodGeneral pl = new ProbabilityLikelihoodGeneral(geneVariantsGeneral.get(pos).getRef(), geneVariantsGeneral.get(pos).getAlt(), alleleScores, sampleCN[geneIndex]);
+//						pl.normalize();
+//						
+//						geneVariantsGeneral.get(pos).addSample(sample, pl);
+//
+//					}
+//				}
+//				
+//				
+//				
+//				
+//				
+//				ArrayList<Map.Entry<Integer, VCFVariantGeneral>> scoresList = new ArrayList<Map.Entry<Integer, VCFVariantGeneral>>();
+//				for (Iterator it = geneVariantsGeneral.entrySet().iterator(); it.hasNext(); ) {
+//					Map.Entry<Integer, VCFVariantGeneral> entry = (Map.Entry<Integer, VCFVariantGeneral>) it.next();
+//					scoresList.add(entry);
+//				}
+//				
+//				Collections.sort(scoresList, new Comparator<Map.Entry<Integer, VCFVariantGeneral>>() { public int compare(Map.Entry<Integer, VCFVariantGeneral> e, Map.Entry<Integer, VCFVariantGeneral> e2 ) { if (e.getKey() > e2.getKey()) {return 1;} else if (e2.getKey() > e.getKey()) {return -1; } else {return 0;} } });
+//				for (Iterator it2 = scoresList.iterator(); it2.hasNext(); ) {
+//					Map.Entry<Integer, VCFVariantGeneral> score = (Map.Entry<Integer, VCFVariantGeneral>) it2.next();
+//					Integer varPos = score.getKey();
+//					VCFVariantGeneral sampleVariant = score.getValue();
+//					HashMap<String, ProbabilityLikelihoodGeneral> samplesPl = sampleVariant.getPLSamples();
+//								
+//					
+//					if (sampleVariant.getOffset() < 0) { 
+//						System.out.print("chr19\t"+String.valueOf(-sampleVariant.getOffset()+varPos)+"\t"+String.valueOf(-sampleVariant.getOffset()+varPos)+"\t"+sampleVariant.getRef()+"\t"+sampleVariant.getAltStr()+"\t.\t.\t.\tGT:PL");
+////						String alt = "";
+////						for (int i = 1; i < sampleVariant.getAlt().size(); ++i ) { alt = alt  + Integer.toString(i) + ","; } alt = alt + sampleVariant.getAlt().size(); 
+////						System.out.print("chr19\t"+String.valueOf(-sampleVariant.getOffset()+varPos)+"\t"+String.valueOf(-sampleVariant.getOffset()+varPos)+"\t0\t"+alt+"\t.\t.\t.\tGT:PL");
+//					} 
+//					else {
+//						System.out.print("chr19\t"+String.valueOf(sampleVariant.getOffset()+varPos)+"\t"+String.valueOf(sampleVariant.getOffset()+varPos)+"\t"+sampleVariant.getRef()+"\t"+sampleVariant.getAltStr()+"\t.\t.\t.\tGT:PL");
+//
+////						String alt = "";
+////						for (int i = 1; i < sampleVariant.getAlt().size(); ++i ) { alt = alt  + Integer.toString(i) + ","; } alt = alt + sampleVariant.getAlt().size(); 
+////						System.out.print("chr19\t"+String.valueOf(sampleVariant.getOffset()+varPos)+"\t"+String.valueOf(sampleVariant.getOffset()+varPos)+"\t0\t"+alt+"\t.\t.\t.\tGT:PL");
+//					}
+//					
+//					for (Iterator it3 = samplesCN.keySet().iterator(); it3.hasNext(); ) {
+//						String sample = (String) it3.next();				
+//						File f = new File(pathToDir +  "0." + sample + ".debug");
+//						if (!f.exists()) { continue; }
+//
+//						ProbabilityLikelihoodGeneral pl = samplesPl.get(sample);
+//						System.out.print("\t" +  pl.getGenotype() + ":" + pl.toString());
+//
+//					}
+//					System.out.println();
+//			
+//				
+//				}
+				
 	}
 	
 
@@ -676,7 +781,7 @@ public static void callAllele(Params2 params) throws IOException {
 	long startTime = System.currentTimeMillis();
 
 	//for (int geneIndex = 0; geneIndex < Genes.getGeneTests().size(); ++geneIndex) {
-	int geneIndex = 7;
+	int geneIndex = 14;
 		String geneName = Genes.getGeneTests().get(geneIndex).get(0);
 		
 		String alignedsortedbam = outputDir + geneIndex + "." + template1Name + ".sorted";
@@ -690,6 +795,7 @@ public static void callAllele(Params2 params) throws IOException {
 		HashMap<Integer, Allele> allGeneReference = AlleleTypingMix.allGeneReference;
 		HashMap<Integer, HashMap<String, Allele>> allGeneAlleles = AlleleTypingMix.allGeneAlleles;
 		allGeneReference.get(7).removeVariants(9181, 11384);
+		//allGeneReference.get(14).removeVariants(2777, 16347);
 		HashMap<String, Allele> tempAlleles = new HashMap<String, Allele>();
 		for (Iterator it = allGeneAlleles.get(7).keySet().iterator(); it.hasNext(); ) {
 			String alleleName = (String) it.next();
@@ -786,37 +892,13 @@ public static void printPileup(Params2 params) throws IOException {
 
 }
 	
-public static void filterReads(Params2 params) throws IOException {
-		String template1Name = params.sample;
-		String reads = params.b;
-		String readsIndex = params.i;
-		String freads1 = params.r1;
-		String freads2 = params.r2;
-		String freads = params.r;
-		int k = params.k;
-		String trie = params.t;
-		String outputDir = params.d;
 
-		
-		Trie t = KMerFileReader.getTrieFromFileWithSource(trie);
-		long startTime = System.currentTimeMillis();
-		if (freads1 != null && freads2 != null) {
-			Preprocessor.filterPairedReadsFast(freads1, freads2, t, k, outputDir, template1Name);
-			if (freads != null) { Preprocessor.filterReadsFast(freads, t, k, outputDir, template1Name); } 	
-		} else if (freads != null) {
-			Preprocessor.filterReadsFast(freads, t, k, outputDir, template1Name);
-		} else {
-			Preprocessor.filterSAMReadsFast(reads, readsIndex, t, k, outputDir, template1Name);
-		}
-		int time = (int) ((System.currentTimeMillis()-startTime));
-		System.out.println("Time to filter reads (ms): " + time);
-
-	}
 	
 	public static Params2 parse_cmd(String[] args) {
 		Params2 p = new Params2();
 
 		Options options = new Options();
+		
 		options.addOption("sample", true, "sample name");
 		
 		options.addOption("c", true, "copy numbers separated by ,");
@@ -843,7 +925,7 @@ public static void filterReads(Params2 params) throws IOException {
 			
 			if(cmd.hasOption("sample")) {
 				p.sample = cmd.getOptionValue("sample"); 
-			} //else { usage_exit(); }
+			} 
 			
 			if(cmd.hasOption("c")) {
 				String temp = cmd.getOptionValue("c"); 
@@ -858,7 +940,7 @@ public static void filterReads(Params2 params) throws IOException {
 						if (!diploidTypeToCopyNumbers.containsKey(temp)) { usage_exit(); }
 						p.c = diploidTypeToCopyNumbers.get(temp);
 					} else {
-						usage_exit();
+						//usage_exit();
 					}
 				}
 			} else { 
@@ -934,7 +1016,9 @@ public static void filterReads(Params2 params) throws IOException {
 			
 			if (cmd.hasOption("o")) {
 				p.o = cmd.getOptionValue("o");
-			} else { usage_exit(); }
+			} else { 
+				//usage_exit();
+				}
 			
 			if (cmd.hasOption("d")) {
 				p.d = cmd.getOptionValue("d");

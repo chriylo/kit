@@ -79,7 +79,10 @@ public class TypePredictor {
 				if (numGeneTest==8) {
 					filteredEntryWeights = getIntersectionEntryWeights(filteredEntryWeights, Typing.aggKmers.get(numGeneTest));
 				}
-
+				//System.out.println("Gene:"+numGeneTest);
+				//filteredEntryWeights.printNonZeroIndices();
+				//System.out.println(filteredEntryWeights.getNumWeightedEntries());	
+				
 				TemplateScorer diploidScorer = new TemplateScorer(Test5.getDiploidBarcodes(Typing.templateBarcodes), diploidTemplateGeneTypes, Typing.getDiploidNames(), filteredEntryWeights);
 				diploidScorer.setCopyNumber(diploidTemplateCopyNumber);
 				
@@ -142,30 +145,33 @@ public class TypePredictor {
 		double[] sampleCopyValues = new double[Typing.geneTests.size()];
 		
 		ArrayList<Integer> badKmers = new ArrayList<Integer>();
-		for (int i = 0; i < Typing.repetitiveKmerIndices.size(); ++i) { badKmers.add(Typing.repetitiveKmerIndices.get(i)); }
+//		for (int i = 0; i < Typing.repetitiveKmerIndices.size(); ++i) { badKmers.add(Typing.repetitiveKmerIndices.get(i)); }
 //		ArrayList<Integer> geneKmerIndices = new ArrayList<Integer>();
 //		for (int g = 0; g < Typing.templateBarcodes[0].length; ++g) {
 //			geneKmerIndices.add(g);
 //		}
 		for (int numGeneTest = 0; numGeneTest < Typing.geneTests.size(); numGeneTest+=1) {
+			//System.out.println("gene test: " + numGeneTest);
 			ArrayList<String> genes = Typing.geneTests.get(numGeneTest);
 			
 			/*** Initialize Scorers ***/
 			int[] templateCopyNumber = Typing.getCopyNumber(Typing.getNames(), Typing.templateRegions, genes);
 			String[] templateGeneTypes = Typing.getPresenceAbsenceTypes(Typing.getNames(), Typing.templateRegions, genes);
 			
-			ArrayList<Integer> geneKmerIndices = new ArrayList<Integer>();
-			for (int g = 0; g < genes.size(); ++g) {
-				ArrayList<Integer> temp = Typing.geneIndicesMap.get(genes.get(g));
-				for (int t = 0; t < temp.size(); ++t) { geneKmerIndices.add(temp.get(t)); } 
-			}
-			ArrayList<Integer> geneFilteredKmerIndices = getIndicesOfGenesFilteredKmers(geneKmerIndices, Typing.templateBarcodes, templateGeneTypes);
-
+//			ArrayList<Integer> geneKmerIndices = new ArrayList<Integer>();
+//			for (int g = 0; g < genes.size(); ++g) {
+//				ArrayList<Integer> temp = Typing.geneIndicesMap.get(genes.get(g));
+//				for (int t = 0; t < temp.size(); ++t) { geneKmerIndices.add(temp.get(t)); } 
+//			}
+//			ArrayList<Integer> geneFilteredKmerIndices = getIndicesOfGenesFilteredKmers(geneKmerIndices, Typing.templateBarcodes, templateGeneTypes);
+			ArrayList<Integer> geneFilteredKmerIndices = getIndicesOfGenesFilteredKmers(Typing.getUniqueKmers(numGeneTest), Typing.templateBarcodes, templateGeneTypes);
+			
 			EntryWeights filteredEntryWeights  = getEntryWeights(Typing.templateBarcodes, geneFilteredKmerIndices, badKmers);
 			//EntryWeights finalEntryWeights = getIntersectionEntryWeights(filteredEntryWeights, Typing.aggKmers.get(numGeneTest));
-			if (numGeneTest==8) {
-				filteredEntryWeights = getIntersectionEntryWeights(filteredEntryWeights, Typing.aggKmers.get(numGeneTest));
-			}
+//			if (numGeneTest==8) {
+//				filteredEntryWeights = getIntersectionEntryWeights(filteredEntryWeights, Typing.aggKmers.get(numGeneTest));
+//			}
+			//System.out.println(filteredEntryWeights.getNumWeightedEntries());
 
 			TemplateScorer haploidScorer = new TemplateScorer(Typing.templateBarcodes, templateGeneTypes, Typing.getNames(), filteredEntryWeights);
 			haploidScorer.setCopyNumber(templateCopyNumber);

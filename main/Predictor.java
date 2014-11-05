@@ -14,7 +14,7 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 
 import typing.TypePredictor;
-import typing.Typing;
+//import typing.Typing;
 
 public class Predictor {
 

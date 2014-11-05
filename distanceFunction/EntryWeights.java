@@ -31,6 +31,14 @@ public class EntryWeights {
 		this(size, 1);
 	}
 	
+	public double totalWeight() {
+		double total = 0;
+		for (int i = 0; i < weights.length; ++i) {
+			total += weights[i];
+		}
+		return total;
+	}
+	
 	public EntryWeights(double[] myWeights) {
 		this.weights = myWeights;
 		this.size = myWeights.length;

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 	 public int k;
 	 public String pathToReferenceDir;
 	 public String pathToTemplateBarcodesDir;
+	 public int c;
 	 
     public Params(){
     	test = 0;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
     	k = 50;    	
     	pathToReferenceDir = "";
     	pathToTemplateBarcodesDir = "";
+    	c = 5;
     }
     
 }

@@ -253,6 +253,7 @@ public class Trie3 implements Trie{
 			currState = currState.progress(start, end, shiftBox);
 
 			if (shiftBox[0] == 0 && currState.wordIx != NO_WORD){
+				//System.out.println(currState.wordIx + "\t" + (start - prevWordLength));
 				f.execute(currState.wordIx, start - prevWordLength);
 			}
 

@@ -3,55 +3,34 @@ package typing;
 import barcodeFunctions.*;
 import clusterFunctions.*;
 import distanceFunction.*;
-import generator.*;
 import typing.TemplateScores;
-import main.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 
-public class Typing {
+public class Typing2 {
 	
-	public static int k = 50;
-	public static String pathToTemplateBarcodes;
-	public static String pathToTemplates;
-	public static String pathToReferenceBarcode;
-	public static File[] templateBarcodeFiles;
-	public static String pathToTrie;
-	public static Trie t;
+	public static final HashMap<String, String> templateTypes = new HashMap<String, String> ();
+	public static final HashMap<String, String> templateFastaFileNames = new HashMap<String, String>();
+	private static HashMap<String, int[]> typeCopyNumbers;
+	private static HashMap<String, int[]> diploidTypeCopyNumbers;
+	private static HashMap<String, String> copyNumbersToType;
+	private static HashMap<String, String> typeToCopyNumbers;
+	private static HashMap<String, String> diploidCopyNumbersToType;
+	private static HashMap<String, String> diploidTypeToCopyNumbers;
+	private static ArrayList<Integer> geneIndexFramework = new ArrayList<Integer>();
 	
-	public static HashMap<String, String> templateTypes = new HashMap<String, String> ();
-	public static HashMap<String, String> templateFastaFileNames = new HashMap<String, String>();
-	public static HashMap<String, int[]> typeCopyNumbers;
-	public static HashMap<String, int[]> diploidTypeCopyNumbers;
-	public static HashMap<String, String> copyNumbersToType;
-	public static HashMap<String, String> typeToCopyNumbers;
-	public static HashMap<String, String> diploidCopyNumbersToType;
-	public static HashMap<String, String> diploidTypeToCopyNumbers;
-	
-	public static ArrayList<ArrayList<String>> geneTests = new ArrayList<ArrayList<String>>();
+	public static final ArrayList<ArrayList<String>> geneTests = new ArrayList<ArrayList<String>>();
 
-	public static HashMap<String, HashMap<String, int[]>> templateRegions = new HashMap<String, HashMap<String, int[]>>();
-	public static HashMap<String, ArrayList<Integer>> geneIndicesMap;
-	public static HashMap<String, HashMap<String, ArrayList<Integer>>> templateRegionsIndicesMap;
-	public static ArrayList<Integer> repetitiveKmerIndices;
-	public static HashMap<Integer, EntryWeights> aggKmers; 
-	public static HashMap<Integer, EntryWeights> uniqueKmers; 
-	public static ArrayList<String> templates = new ArrayList<String>();
+	public static final HashMap<String, HashMap<String, int[]>> templateRegions = new HashMap<String, HashMap<String, int[]>>();
+
+	public static final ArrayList<String> templates = new ArrayList<String>();
 	
-	public static int[][] templateBarcodes;
 	
 	static{
-		pathToTemplateBarcodes = "Data/Barcodes/Template_Ref_"+k;
-		pathToTemplates = "Data/TemplatesMasked";
-		pathToTrie = "Data/Tries/trie50";
-		pathToReferenceBarcode = "Data/Barcodes/Reference/reference50.barcod";
 		
-		geneTests = Genes.geneTests;
-		
-//		templates.add("ABC08A");
+		templates.add("ABC08A");
 		templates.add("FH05A");
 		templates.add("FH06A");
 		templates.add("FH08A");
@@ -77,7 +56,8 @@ public class Typing {
 		templates.add("FH15B");
 		templates.add("WT47B");
 		
-//		templateTypes.put("ABC08A", "A");
+		
+		templateTypes.put("ABC08A", "A");
 		templateTypes.put("FH05A", "A");
 		templateTypes.put("FH06A", "A");
 		templateTypes.put("FH08A", "A");
@@ -103,7 +83,7 @@ public class Typing {
 		templateTypes.put("FH15B", "B");
 		templateTypes.put("WT47B", "B");
 		
-//		templateFastaFileNames.put("ABC08A", "ABC08A.masked.fa");
+		templateFastaFileNames.put("ABC08A", "ABC08A.masked.fa");
 		templateFastaFileNames.put("G085A", "G085A.masked.fa");
 		templateFastaFileNames.put("RSHA", "RSHA.masked.fa");
 		templateFastaFileNames.put("FH06A", "FH06A.masked.fa");
@@ -128,31 +108,177 @@ public class Typing {
 		templateFastaFileNames.put("FH15B", "FH15B.masked.fa");
 		templateFastaFileNames.put("WT47B", "WT47B.masked.fa");
 		
-		typeCopyNumbers = Genes.typeCopyNumbers;
+		typeCopyNumbers = new HashMap<String, int[]>();
+//		//-8,15
+//		typeCopyNumbers.put("A", new int[] {1,0,1,0,0,0,1,1,1,0,1,0,1});
+//		typeCopyNumbers.put("AB",new int[] {1,0,1,0,1,1,1,1,1,1,0,1,0});
+//		typeCopyNumbers.put("BA1",new int[] {1,1,0,1,0,0,0,1,1,0,1,0,1});
+//		typeCopyNumbers.put("BA2X",new int[] {1,0,1,0,1,1,1,1,1,0,1,0,1});
+//		typeCopyNumbers.put("BA2",new int[] {1,1,0,1,1,1,1,1,1,0,1,0,1});
+//		typeCopyNumbers.put("Bdel",new int[] {1,1,0,1,1,1,0,1,1,1,0,1,0});
+//		typeCopyNumbers.put("B",new int[] {1,1,0,1,2,2,1,1,1,1,0,1,0});
+//		//-15
+//		typeCopyNumbers.put("A", new int[] {1,0,1,0,0,0,1,1,1,1,0,1,0,1});
+//		typeCopyNumbers.put("AB",new int[] {1,0,1,0,1,1,1,1,1,1,1,0,1,0});
+//		typeCopyNumbers.put("BA1",new int[] {1,1,0,1,0,0,0,0,1,1,0,1,0,1});
+//		typeCopyNumbers.put("BA2X",new int[] {1,0,1,0,1,1,1,1,1,1,0,1,0,1});
+//		typeCopyNumbers.put("BA2",new int[] {1,1,0,1,1,1,1,1,1,1,0,1,0,1});
+//		typeCopyNumbers.put("Bdel",new int[] {1,1,0,1,1,1,0,0,1,1,1,0,1,0});
+//		typeCopyNumbers.put("B",new int[] {1,1,0,1,2,2,1,1,1,1,1,0,1,0});
+		//all included
+		typeCopyNumbers.put("A", new int[] 	{1,0,1,0,0,0,1,1,1,1,0,1,0,1,1});
+		typeCopyNumbers.put("AB",new int[] 	{1,0,1,0,1,1,1,1,1,1,1,0,1,0,1});
+		typeCopyNumbers.put("BA1",new int[] {1,1,0,1,0,0,0,0,1,1,0,1,0,1,1});
+		typeCopyNumbers.put("BA2X",new int[]{1,0,1,0,1,1,1,1,1,1,0,1,0,1,1});
+		typeCopyNumbers.put("BA2",new int[] {1,1,0,1,1,1,1,1,1,1,0,1,0,1,1});
+		typeCopyNumbers.put("Bdel",new int[]{1,1,0,1,1,1,0,0,1,1,1,0,1,0,1});
+		typeCopyNumbers.put("B",new int[] 	{1,1,0,1,2,2,1,1,1,1,1,0,1,0,1});
+//		//-8
+//		typeCopyNumbers.put("A", new int[] 	{1,0,1,0,0,0,1,1,1,0,1,0,1,1});
+//		typeCopyNumbers.put("AB",new int[] 	{1,0,1,0,1,1,1,1,1,1,0,1,0,1});
+//		typeCopyNumbers.put("BA1",new int[] {1,1,0,1,0,0,0,1,1,0,1,0,1,1});
+//		typeCopyNumbers.put("BA2X",new int[]{1,0,1,0,1,1,1,1,1,0,1,0,1,1});
+//		typeCopyNumbers.put("BA2",new int[] {1,1,0,1,1,1,1,1,1,0,1,0,1,1});
+//		typeCopyNumbers.put("Bdel",new int[]{1,1,0,1,1,1,0,1,1,1,0,1,0,1});
+//		typeCopyNumbers.put("B",new int[] 	{1,1,0,1,2,2,1,1,1,1,0,1,0,1});
+		
+		geneIndexFramework.add(0);
+		geneIndexFramework.add(8);
+		geneIndexFramework.add(9);
+		geneIndexFramework.add(14);
 
+		diploidTypeCopyNumbers = new HashMap<String, int[]>();
+		for (Iterator typeIt = typeCopyNumbers.keySet().iterator(); typeIt.hasNext(); ) {
+			String type1 = (String) typeIt.next();
+			for (Iterator typeIt2 = typeCopyNumbers.keySet().iterator(); typeIt2.hasNext(); ) {
+				String type2 = (String) typeIt2.next();
+				String[] temp = new String[2];
+				temp[0] = type1;
+				temp[1] = type2;
+				Arrays.sort(temp);
+				int[] cn = new int[typeCopyNumbers.get(type1).length];
+				for (int i = 0; i < cn.length; ++i) {
+					cn[i] = typeCopyNumbers.get(type1)[i] + typeCopyNumbers.get(type2)[i];
+				}
+				diploidTypeCopyNumbers.put(temp[0] + "_" + temp[1], cn);
+			}
+		}
 		
 		
+		typeToCopyNumbers = new HashMap<String, String>();
+		for (Iterator typeIt = typeCopyNumbers.keySet().iterator(); typeIt.hasNext(); ) {
+			String type = (String) typeIt.next();
+			int[] cn = typeCopyNumbers.get(type);
+			String temp = Integer.toString(cn[0]);
+			for (int i = 1; i < cn.length; ++i) {
+				temp = temp + "," + Integer.toString(cn[i]); 
+			}
+			typeToCopyNumbers.put(type, temp);
+		}
+		
+		copyNumbersToType = new HashMap<String, String>();
+		for (Iterator it = typeToCopyNumbers.keySet().iterator(); it.hasNext();) {
+			String key = (String) it.next();
+			copyNumbersToType.put(typeToCopyNumbers.get(key), key);
+		}
+		
+		diploidTypeToCopyNumbers = new HashMap<String, String>();
+		for (Iterator typeIt = diploidTypeCopyNumbers.keySet().iterator(); typeIt.hasNext(); ) {
+			String type = (String) typeIt.next();
+			int[] cn = diploidTypeCopyNumbers.get(type);
+			String temp = Integer.toString(cn[0]);
+			for (int i = 1; i < cn.length; ++i) {
+				temp = temp + "," + Integer.toString(cn[i]); 
+			}
+			diploidTypeToCopyNumbers.put(type, temp);
+		}
 		
 		
-//		HashMap<String, int[]> ABC08A = new HashMap<String, int[]>();
-//		ABC08A.put("KIR3DL3", new int[] {0, 11557});
-//		ABC08A.put("1_intergenic", new int[] {11557, 14005});
-//		ABC08A.put("KIR2DL3", new int[] {14005, 27993});
-//		ABC08A.put("3_intergenic", new int[] {27993, 30473});
-//		ABC08A.put("KIR2DP1", new int[] {30473, 42821});
-//		ABC08A.put("5_intergenic", new int[] {42821, 45301});
-//		ABC08A.put("KIR2DL1", new int[] {45301, 59262});
-//		ABC08A.put("7_intergenic", new int[] {59262, 61804});
-//		ABC08A.put("KIR3DP1", new int[] {61804, 65767});
-//		ABC08A.put("9_intergenic", new int[] {65767, 79088});
-//		ABC08A.put("KIR2DL4", new int[] {79088, 89590});
-//		ABC08A.put("11_intergenic", new int[] {89590, 91981});
-//		ABC08A.put("KIR3DL1", new int[] {91981, 105758});
-//		ABC08A.put("13_intergenic", new int[] {105758, 108248});
-//		ABC08A.put("KIR2DS4", new int[] {108248, 123448});
-//		ABC08A.put("last_intergenic", new int[] {123448, 125979});
-//		ABC08A.put("KIR3DL2", new int[] {125979, 128047});
-//		templateRegions.put("ABC08A", ABC08A);
+		diploidCopyNumbersToType = new HashMap<String, String>();
+		for (Iterator it = diploidTypeToCopyNumbers.keySet().iterator(); it.hasNext();) {
+			String key = (String) it.next();
+			diploidCopyNumbersToType.put(diploidTypeToCopyNumbers.get(key), key);
+		}
+		
+		ArrayList<String> geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR3DL3");
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR2DS2");
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR2DL3"); 	//geneNames.add("KIR2DL2"); 
+		geneTests.add(geneNames);
+		
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR2DL2"); 
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR2DL5B"); geneNames.add("KIR2DL5A");
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR2DS3B"); geneNames.add("KIR2DS3A");		geneNames.add("KIR2DS5A"); geneNames.add("KIR2DS5B");
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR2DP1");
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR2DL1");
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR3DP1");
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR2DL4");
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR3DS1"); 		//geneNames.add("KIR3DL1");
+		geneTests.add(geneNames);
+		
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR3DL1");
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR2DS1");
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR2DS4");
+		geneTests.add(geneNames);
+
+		geneNames = new ArrayList<String>(); 
+		geneNames.add("KIR3DL2");
+		geneTests.add(geneNames);
+		
+		HashMap<String, int[]> ABC08A = new HashMap<String, int[]>();
+		ABC08A.put("KIR3DL3", new int[] {0, 11557});
+		ABC08A.put("1_intergenic", new int[] {11557, 14005});
+		ABC08A.put("KIR2DL3", new int[] {14005, 27993});
+		ABC08A.put("3_intergenic", new int[] {27993, 30473});
+		ABC08A.put("KIR2DP1", new int[] {30473, 42821});
+		ABC08A.put("5_intergenic", new int[] {42821, 45301});
+		ABC08A.put("KIR2DL1", new int[] {45301, 59262});
+		ABC08A.put("7_intergenic", new int[] {59262, 61804});
+		ABC08A.put("KIR3DP1", new int[] {61804, 65767});
+		ABC08A.put("9_intergenic", new int[] {65767, 79088});
+		ABC08A.put("KIR2DL4", new int[] {79088, 89590});
+		ABC08A.put("11_intergenic", new int[] {89590, 91981});
+		ABC08A.put("KIR3DL1", new int[] {91981, 105758});
+		ABC08A.put("13_intergenic", new int[] {105758, 108248});
+		ABC08A.put("KIR2DS4", new int[] {108248, 123448});
+		ABC08A.put("last_intergenic", new int[] {123448, 125979});
+		ABC08A.put("KIR3DL2", new int[] {125979, 128047});
+		templateRegions.put("ABC08A", ABC08A);
 
 		HashMap<String, int[]> G085A = new HashMap<String, int[]>();
 		G085A.put("KIR3DL3", new int[] {0, 11557});
@@ -668,160 +794,7 @@ public class Typing {
 		WT47B.put("last_intergenic", new int[] {195452, 197808});
 		WT47B.put("KIR3DL2", new int[] {197808, 214569});
 		templateRegions.put("WT47B", WT47B);
-		
-		generateDiploid();
-		
-		
-		try {
-			getBarcodes();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	private static void generateDiploid() {
-		diploidTypeCopyNumbers = Genes.diploidTypeCopyNumbers;
-		
-		
-		typeToCopyNumbers = Genes.typeToCopyNumbers;
-		
-		copyNumbersToType = Genes.copyNumbersToType;
-		
-		diploidTypeToCopyNumbers = Genes.diploidTypeToCopyNumbers;
-		
-		
-		diploidCopyNumbersToType = Genes.diploidCopyNumbersToType;
-	}
-	
-	private static void getBarcodes() throws IOException {
-		File templateBarcodesDir = new File(pathToTemplateBarcodes);
-		
-		/*** Get templates ***/
-		templateBarcodeFiles = templateBarcodesDir.listFiles();
-		Arrays.sort(templateBarcodeFiles);
-		templateBarcodes = new int[templateBarcodeFiles.length][];
-		for (int j = 0; j < templateBarcodeFiles.length; j++) {
-			String t1 = templateBarcodeFiles[j].getAbsolutePath();
-			templateBarcodes[j] = KMerFileReader.getBarcodeFromFile(t1);
-		}
-		
-		
-		t = KMerFileReader.getTrieFromFile(pathToTrie);
-		
-		templateRegionsIndicesMap = new HashMap<String, HashMap<String, ArrayList<Integer>>>();
-		geneIndicesMap = new HashMap<String, ArrayList<Integer>>();
-		HashMap<String, String> templateFastaFileNames = Typing.getTemplateFastaFileNames();
-		for (Iterator it = Typing.templateRegions.keySet().iterator(); it.hasNext(); ) {
-			String template = (String) it.next();
-			templateRegionsIndicesMap.put(template, new HashMap<String, ArrayList<Integer>>());
-			HashMap<String, int[]> myRegions = Typing.templateRegions.get(template);
-			for (Iterator it2 = myRegions.keySet().iterator(); it2.hasNext(); ) {
-				String region = (String) it2.next();
-				templateRegionsIndicesMap.get(template).put(region, new ArrayList<Integer>());
-				if (!geneIndicesMap.containsKey(region)) { geneIndicesMap.put(region, new ArrayList<Integer>()); }
-				int[] myIndices = KMerFileReader.indexKMersFile((new File(pathToTemplates)).getAbsolutePath() + File.separatorChar + templateFastaFileNames.get(template), Typing.k, t, myRegions.get(region)[0], myRegions.get(region)[1]);
-				for (int i = 0; i < myIndices.length; ++i) {
-					if (!geneIndicesMap.get(region).contains(myIndices[i])) { geneIndicesMap.get(region).add(myIndices[i]); } 
-					templateRegionsIndicesMap.get(template).get(region).add(myIndices[i]);
-				}
-			}
-		}
-		
-		repetitiveKmerIndices = getIndicesOfRepetitiveKmers(Typing.templateBarcodes);
 
-
-		aggKmers = new HashMap<Integer, EntryWeights>();
-		for (int numGeneTest = 0; numGeneTest < Typing.geneTests.size(); numGeneTest+=1) {
-			ArrayList<String> genes = Typing.geneTests.get(numGeneTest);
-			double[] weights = new double[Typing.templateBarcodes[0].length];
-			int[] templateCopyNumber = Typing.getCopyNumber(Typing.getNames(), Typing.templateRegions, genes);
-			
-			int numBarcodes = 0;
-			for (int i = 0; i < templateCopyNumber.length; ++i) {
-				if (templateCopyNumber[i]>0) { numBarcodes+=1; }
-			}
-					
-			double[] scaledTemplateBarcode = new double[Typing.templateBarcodes[0].length];
-			double[] var = new double[Typing.templateBarcodes[0].length];
-			Arrays.fill(scaledTemplateBarcode, 0);
-			for (int i = 0; i < Typing.templateBarcodes.length; ++i) {
-				if (templateCopyNumber[i]>0) {
-					for (int j = 0; j < Typing.templateBarcodes[0].length; ++j) {
-						scaledTemplateBarcode[j] += (Typing.templateBarcodes[i][j])/templateCopyNumber[i];
-						var[j] += Math.pow(Typing.templateBarcodes[i][j]/templateCopyNumber[i],2);
-					}
-				}
-			}
-			for (int i = 0; i < scaledTemplateBarcode.length; ++i) {
-				scaledTemplateBarcode[i] = scaledTemplateBarcode[i]/numBarcodes;
-				double blah = Math.abs(var[i]/numBarcodes - Math.pow(scaledTemplateBarcode[i],2));
-				if (blah<=0.25) {
-					weights[i] = 1;
-				} else { weights[i] = 0; } 
-			}
-			EntryWeights eweights = new EntryWeights(weights);
-			aggKmers.put(numGeneTest, eweights);
-		}
-//		
-//		uniqueKmers = new HashMap<Integer, EntryWeights>();
-//		pathToTemplateBarcodes = "Data/Barcodes/Reference/reference50.barcod";
-//		for (int numGeneTest = 0; numGeneTest < Typing.geneTests.size(); numGeneTest+=1) {
-//
-//		}
-	}
-	
-	public static ArrayList<Integer> getUniqueKmers( int geneTestIndex) throws IOException {
-		int[] reference = KMerFileReader.getBarcodeFromFile(pathToReferenceBarcode);
-		ArrayList<Integer> all = new ArrayList<Integer>();
-		ArrayList<ArrayList<String>> geneTests = Typing.getGeneTests();
-		
-		for (int g = 0; g < geneTests.get(geneTestIndex).size(); ++g) {
-			ArrayList<Integer> indices = Typing.geneIndicesMap.get(geneTests.get(geneTestIndex).get(g));
-			for (int i = 0; i < indices.size(); ++i) {
-				if (!all.contains(indices.get(i))) {
-					all.add(indices.get(i));
-				}
-			}
-		}
-		
-		System.out.println(all.size());
-		for (int otherGeneIndex = 0; otherGeneIndex < geneTests.size(); ++otherGeneIndex) {
-		if (otherGeneIndex != geneTestIndex) {
-			for (int g = 0; g < geneTests.get(otherGeneIndex).size(); ++g) {
-				ArrayList<Integer> indices = Typing.geneIndicesMap.get(geneTests.get(otherGeneIndex).get(g));
-				for (int i = 0; i < indices.size(); ++i) {
-					if (all.contains(indices.get(i))) {
-						all.remove(all.indexOf(indices.get(i)));
-					}
-				}
-			}
-		}
-		}
-			
-		System.out.println(all.size());
-		for (int i = 0; i < reference.length; ++i) {
-			if (reference[i]>0){
-				if (all.contains(i)) {
-					all.remove(all.indexOf(i));
-				}
-			}
-		}
-		System.out.println(all.size());
-
-		return all;
-		
-	}
-	
-	
-	private static ArrayList<Integer> getIndicesOfRepetitiveKmers(int[][] templateBarcodes) {
-		ArrayList<Integer> repetitive = new ArrayList<Integer>();
-		for (int i = 0; i < templateBarcodes.length; ++i) {
-			for (int j = 0; j < templateBarcodes[i].length; ++j) {
-				if (templateBarcodes[i][j] >= 50) { repetitive.add(j); }
-			}
-		}
-		return repetitive;
 	}
 	
 	public static HashMap<String, String> getTemplateFastaFileNames() {
@@ -860,9 +833,98 @@ public class Typing {
 		return geneTests;
 	}
 	
+	public static ArrayList<String> getDiploidNames(File[] templateBarcodes1, File[] templateBarcodes2) {
+		int barlen = templateBarcodes1.length;
+		ArrayList<String> diploidTemplateNames = new ArrayList<String>();
+		ArrayList<String> templateNames1 = getNames(templateBarcodes1);
+		ArrayList<String> templateNames2 = getNames(templateBarcodes2);
+		int currIndex = 0;
+		for (int i = 0; i < templateNames1.size(); ++i) {
+			for (int j = i; j < templateNames2.size(); ++j){
+				String[] temp = new String[2];
+				temp[0] = templateNames1.get(i);
+				temp[1] = templateNames2.get(j);
+				Arrays.sort(temp);
+				diploidTemplateNames.add(temp[0] + "_" + temp[1]);
+				currIndex+=1;
+			}
+		}
+		
+		return diploidTemplateNames;
+	}
 	
+	public static ArrayList<String> getDiploidNames(File[] templateBarcodes) {
+		int barlen = templateBarcodes.length;
+		ArrayList<String> diploidTemplateNames = new ArrayList<String>();
+		ArrayList<String> templateNames = getNames(templateBarcodes);
+		int currIndex = 0;
+		for (int i = 0; i < templateNames.size(); ++i) {
+			for (int j = i; j < templateNames.size(); ++j){
+				String[] temp = new String[2];
+				temp[0] = templateNames.get(i);
+				temp[1] = templateNames.get(j);
+				Arrays.sort(temp);
+				diploidTemplateNames.add(temp[0] + "_" + temp[1]);
+				currIndex+=1;
+			}
+		}
+		
+		return diploidTemplateNames;
+		//set types
+	}
+	
+	public static ArrayList<String> getDiploidTypes(File[] templateBarcodes1, File[] templateBarcodes2) {
+		int barlen = templateBarcodes1.length;
+		ArrayList<String> diploidTemplateTypes = new ArrayList<String>();
+		ArrayList<String> templateTypes1 = getTypes(templateBarcodes1);
+		ArrayList<String> templateTypes2 = getTypes(templateBarcodes2);
+		int currIndex = 0;
+		for (int i = 0; i < templateTypes1.size(); ++i) {
+			for (int j = i; j < templateTypes2.size(); ++j){
+				String[] temp = new String[2];
+				temp[0] = templateTypes1.get(i);
+				temp[1] = templateTypes2.get(j);
+				Arrays.sort(temp);
+				diploidTemplateTypes.add(temp[0] + "_" + temp[1]);
+				currIndex+=1;
+			}
+		}
+		
+		return diploidTemplateTypes;
+	}
+	
+	public static ArrayList<String> getDiploidTypes(File[] templateBarcodes) {
+		int barlen = templateBarcodes.length;
+		ArrayList<String> diploidTemplateTypes = new ArrayList<String>();
+		ArrayList<String> templateTypes = getTypes(templateBarcodes);
+		int currIndex = 0;
+		for (int i = 0; i < templateTypes.size(); ++i) {
+			for (int j = i; j < templateTypes.size(); ++j){
+				String[] temp = new String[2];
+				temp[0] = templateTypes.get(i);
+				temp[1] = templateTypes.get(j);
+				Arrays.sort(temp);
+				diploidTemplateTypes.add(temp[0] + "_" + temp[1]);
+				currIndex+=1;
+			}
+		}
+		
+		return diploidTemplateTypes;
+		//set types
+	}
 
-	
+	public static ArrayList<String> getNames(File[] templateBarcodes) {
+		ArrayList<String> names = new ArrayList<String>();
+		for (int i = 0; i < templateBarcodes.length; ++i) {
+			for (Iterator it = templateTypes.keySet().iterator(); it.hasNext(); ) {
+				String key = (String) it.next();
+				if (templateBarcodes[i].toString().contains(key)) {
+					names.add(key);
+				}
+			}
+		}
+		return names;
+	}
 	
 	
 	
@@ -885,6 +947,10 @@ public class Typing {
 			}
 		}
 		return diploidTypes;
+	}
+	
+	public static ArrayList<Integer> getFrameowkrGenes() {
+		return geneIndexFramework;
 	}
 	
 	public static int[] getDiploidCopyNumber(ArrayList<String> tempTemplateNames, HashMap<String, HashMap<String, int[]>> templateRegions, ArrayList<String> genes) {
@@ -937,93 +1003,28 @@ public class Typing {
 
 	}
 	
-	
-	
-	public static ArrayList<String> getNames() {
-		ArrayList<String> names = new ArrayList<String>();
-		for (int i = 0; i < templateBarcodeFiles.length; ++i) {
-			for (Iterator it = Typing.templateTypes.keySet().iterator(); it.hasNext(); ) {
-				String key = (String) it.next();
-				if (templateBarcodeFiles[i].toString().contains(key)) {
-					names.add(key);
-				}
-			}
-		}
-		return names;
-//		return templates;
-	}
 
 	
-	public static ArrayList<String> getDiploidNames() {
-		int barlen = templateBarcodes.length;
-		ArrayList<String> diploidTemplateNames = new ArrayList<String>();
-		ArrayList<String> templateNames = getNames();
-		int currIndex = 0;
-		for (int i = 0; i < templateNames.size(); ++i) {
-			for (int j = i; j < templateNames.size(); ++j){
-				String[] temp = new String[2];
-				temp[0] = templateNames.get(i);
-				temp[1] = templateNames.get(j);
-				Arrays.sort(temp);
-				diploidTemplateNames.add(temp[0] + "_" + temp[1]);
-				currIndex+=1;
-			}
-		}
-		
-		return diploidTemplateNames;
-	}
-	
-	
-	public static ArrayList<String> getTypes() {
+	public static ArrayList<String> getTypes(File[] templateBarcodes) {
 		ArrayList<String> types = new ArrayList<String>();
-		for (int i = 0; i < templateBarcodeFiles.length; ++i) {
-			for (Iterator it = Typing.templateTypes.keySet().iterator(); it.hasNext(); ) {
+		for (int i = 0; i < templateBarcodes.length; ++i) {
+			for (Iterator it = templateTypes.keySet().iterator(); it.hasNext(); ) {
 				String key = (String) it.next();
-				if (templateBarcodeFiles[i].toString().contains(key)) {
-					types.add(Typing.templateTypes.get(key));
+				if (templateBarcodes[i].toString().contains(key)) {
+					types.add(templateTypes.get(key));
 				}
 			}
 		}
 		return types;
-//		for (int i = 0 ; i < templates.size(); ++i) {
-//			types.add(templateTypes.get(templates.get(i)));
-//		}
-//		return types;
 		
          
 	}
-
-	public static ArrayList<String> getDiploidTypes() {
-		int barlen = templateBarcodes.length;
-		ArrayList<String> diploidTemplateTypes = new ArrayList<String>();
-		ArrayList<String> templateTypes = getTypes();
-		int currIndex = 0;
-		for (int i = 0; i < templateTypes.size(); ++i) {
-			for (int j = i; j < templateTypes.size(); ++j){
-				String[] temp = new String[2];
-				temp[0] = templateTypes.get(i);
-				temp[1] = templateTypes.get(j);
-				Arrays.sort(temp);
-				diploidTemplateTypes.add(temp[0] + "_" + temp[1]);
-				currIndex+=1;
-			}
-		}
-		
-		return diploidTemplateTypes;
-		//set types
-	}
 	
-	public static int[][] getDiploidBarcodes() {
-		int numBarcodes = templateBarcodes.length;
-		int[][] diploidBarcodes = new int[(((numBarcodes*numBarcodes)-numBarcodes)/2)+numBarcodes][];
-		int currIndx = 0;
-		for (int i = 0; i < numBarcodes; ++i) {
-			for (int j = i; j < numBarcodes; ++j) {
-				diploidBarcodes[currIndx]=BarcodeFunctions.addBarcodes(templateBarcodes[i], templateBarcodes[j]);
-				currIndx += 1;
-			}
-		}
-		return diploidBarcodes;
-	}
+	
+	
+
+	
+	
+	
 
 }

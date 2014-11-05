@@ -272,9 +272,9 @@ public class Preprocessor {
 	 */
 	public static Trie getUniqueKmers(TypePredictor predictor, int k, int geneTestIndex, String pathToReferenceBarcode) throws IOException {
 		
-		PrintStream ps;
+		//PrintStream ps;
 		ArrayList<ArrayList<String>> temp = Typing.getGeneTests();
-		ps = new PrintStream(temp.get(geneTestIndex).get(0)+"_unique_targets.txt");
+		//ps = new PrintStream(temp.get(geneTestIndex).get(0)+"_unique_targets.txt");
 		
 		//get indices of gene kmer
 		int[] reference = KMerFileReader.getBarcodeFromFile(pathToReferenceBarcode);
@@ -282,18 +282,26 @@ public class Preprocessor {
 		Trie t = Typing.t;
 		ArrayList<Integer> all = new ArrayList<Integer>();
 		ArrayList<ArrayList<String>> geneTests = Typing.getGeneTests();
-		ArrayList<Integer> indices = Typing.geneIndicesMap.get(geneTests.get(geneTestIndex));
-		for (int i = 0; i < indices.size(); ++i) {
-			if (!all.contains(indices.get(i))) {
-				all.add(indices.get(i));
+		for (int g = 0; g < geneTests.get(geneTestIndex).size(); ++g) {
+			ArrayList<Integer> indices = Typing.geneIndicesMap.get(geneTests.get(geneTestIndex).get(g));
+			for (int i = 0; i < indices.size(); ++i) {
+				if (!all.contains(indices.get(i))) {
+					all.add(indices.get(i));
+				}
 			}
 		}
 		//System.out.println(all.size());
-		indices = Typing.geneIndicesMap.get(geneTests.get(geneTestIndex));
-		for (int i = 0; i < indices.size(); ++i) {
-			if (all.contains(indices.get(i))) {
-				all.remove(all.indexOf(indices.get(i)));
+		for (int otherGeneIndex = 0; otherGeneIndex < geneTests.size(); ++otherGeneIndex) {
+		if (otherGeneIndex != geneTestIndex) {
+			for (int g = 0; g < geneTests.get(otherGeneIndex).size(); ++g) {
+				ArrayList<Integer> indices = Typing.geneIndicesMap.get(geneTests.get(otherGeneIndex).get(g));
+				for (int i = 0; i < indices.size(); ++i) {
+					if (all.contains(indices.get(i))) {
+						all.remove(all.indexOf(indices.get(i)));
+					}
+				}
 			}
+		}
 		}
 			
 		//System.out.println(all.size());
@@ -309,12 +317,13 @@ public class Preprocessor {
 		Trie3 newt = new Trie3();		
 		String[] words = t.words();
 		for (int a = 0 ; a < all.size(); ++a) {
+			System.out.println(all.get(a));
 			newt.addWord(words[all.get(a)]);
 			//ps.println(">" + all.get(a));
 			//System.out.println(">" + all.get(a));
 			//ps.println(words[all.get(a)]);
 			//System.out.println(words[all.get(a)]);
-			ps.println(all.get(a));
+			//ps.println(all.get(a));
 		}
 		//ps.close();
 		newt.finalize();

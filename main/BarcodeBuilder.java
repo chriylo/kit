@@ -243,11 +243,15 @@ public class BarcodeBuilder {
 		//Output trie
 		if (output) {
 			File triesDir = new File(pathToTries);
-			String trieFile = triesDir.getAbsolutePath() + File.separatorChar + "trietest" + k;
+			String trieFile = triesDir.getAbsolutePath() + File.separatorChar + "customindicators" + k;
 			KMerFileReader.printTrieWordsToFile(trieFile, t);
 		}
 				
 		return t;
+	}
+	
+	public static Trie getTrieFromFile(String filename) throws IOException  {
+		return KMerFileReader.getTrieFromFile(filename);
 	}
 	
 	

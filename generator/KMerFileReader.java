@@ -352,8 +352,8 @@ public class KMerFileReader {
 
 	public static int[] countKMersFile(String path, int k, Trie t) throws IOException{
 
-		//int printEvery = 10000000;
-		int printEvery = 100;
+		int printEvery = 10000000;
+		//int printEvery = 100;
 
 		final int[] counts = new int[t.size()];
 		final long[] found = new long[1];

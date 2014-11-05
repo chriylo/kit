@@ -42,7 +42,7 @@ public class Test6 {
 	
 	
 	public static void main(String[] args) throws IOException {
-		//getTrieWithSource();
+//		getTrieWithSource();
 		
 //		testHaploid("Scaled");
 //		testHaploid("5x");
@@ -50,10 +50,10 @@ public class Test6 {
 //		testHaploid("30x");
 //		testHaploid("50x");
 //		testDiploid("Scaled");
-		testDiploid("5x");
-		testDiploid("15x");
-		testDiploid("30x");
-		testDiploid("50x");
+//		testDiploid("5x");
+//		testDiploid("15x");
+//		testDiploid("30x");
+//		testDiploid("50x");
 		
 		//filterReference();
 		
@@ -71,6 +71,29 @@ public class Test6 {
 	        System.out.println(gr.readLine());
 		}
 		**/
+		Params2 params = new Params2();
+		params.setk(50);
+		params.setSample("FH05A");
+		String type1 = Typing.templateTypes.get("FH05A");
+		int[] c = Typing.getTypeCopyNumbers().get(type1);
+		params.setCopyNumber(c);
+		params.setTrie("Data/Tries/trieSource50");
+		
+		params.setGenes("Data/Genes/");
+		params.setOutputDir("Data/FH05A_TempMix/");
+		
+		params.setReadsDir("Data/FH05A_Temp/"); 
+		String reads1 = "Data/FH05A/FH05A" + "_fir.fastq";
+		params.setRead1(reads1);
+		String reads2 = "Data/FH05A/FH05A" + "_sec.fastq";
+		params.setRead2(reads2);
+			
+//		AlleleCaller.filterReads(params);			
+//		//TODO: Filtered reference reads
+			
+//		AlleleCaller.preprocess(params); 
+		
+		AlleleCaller.callAllele(params);
 		
 	}
 
@@ -124,7 +147,7 @@ public static void getTrieWithSource() throws IOException {
 		Trie4 t = new Trie4();
 		for (int geneIndex = 0; geneIndex < Typing.getGeneTests().size(); ++geneIndex) {
 			String geneName = Typing.getGeneTests().get(geneIndex).get(0);
-				
+			System.out.println("Gene:"+geneIndex);
 			//Create trie
 
 			String pathToRefBarcode = "Data/Barcodes/Reference/reference"+k+".barcod";
@@ -133,7 +156,7 @@ public static void getTrieWithSource() throws IOException {
 			for (int ti = 0; ti < uniqueKmers.length; ++ti) { t.addWord(uniqueKmers[ti], geneIndex); }
 		}
 		t.finalize();
-		KMerFileReader.printTrieToFile("trieWithSource.txt", t);	
+		KMerFileReader.printTrieToFile("tempTrieWithSource.txt", t);	
 
 	}
 	
