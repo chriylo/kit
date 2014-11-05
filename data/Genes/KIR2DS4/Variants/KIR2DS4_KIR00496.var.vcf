@@ -1,0 +1,116 @@
+##fileformat=VCFv4.1
+##samtoolsVersion=0.1.19-44428cd
+##reference=file://Data/Genes/KIR2DS4/KIR2DS4.fasta
+##contig=<ID=chr19:KIR2DS4,length=12273>
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw read depth">
+##INFO=<ID=DP4,Number=4,Type=Integer,Description="# high-quality ref-forward bases, ref-reverse, alt-forward and alt-reverse bases">
+##INFO=<ID=MQ,Number=1,Type=Integer,Description="Root-mean-square mapping quality of covering reads">
+##INFO=<ID=FQ,Number=1,Type=Float,Description="Phred probability of all samples being the same">
+##INFO=<ID=AF1,Number=1,Type=Float,Description="Max-likelihood estimate of the first ALT allele frequency (assuming HWE)">
+##INFO=<ID=AC1,Number=1,Type=Float,Description="Max-likelihood estimate of the first ALT allele count (no HWE assumption)">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##INFO=<ID=IS,Number=2,Type=Float,Description="Maximum number of reads supporting an indel and fraction of indel reads">
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes for each ALT allele, in the same order as listed">
+##INFO=<ID=G3,Number=3,Type=Float,Description="ML estimate of genotype frequencies">
+##INFO=<ID=HWE,Number=1,Type=Float,Description="Chi^2 based HWE test P-value based on G3">
+##INFO=<ID=CLR,Number=1,Type=Integer,Description="Log ratio of genotype likelihoods with and without the constraint">
+##INFO=<ID=UGT,Number=1,Type=String,Description="The most probable unconstrained genotype configuration in the trio">
+##INFO=<ID=CGT,Number=1,Type=String,Description="The most probable constrained genotype configuration in the trio">
+##INFO=<ID=PV4,Number=4,Type=Float,Description="P-values for strand bias, baseQ bias, mapQ bias and tail distance bias">
+##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
+##INFO=<ID=PC2,Number=2,Type=Integer,Description="Phred probability of the nonRef allele frequency in group1 samples being larger (,smaller) than in group2.">
+##INFO=<ID=PCHI2,Number=1,Type=Float,Description="Posterior weighted chi^2 P-value for testing the association between group1 and group2 samples.">
+##INFO=<ID=QCHI2,Number=1,Type=Integer,Description="Phred scaled PCHI2.">
+##INFO=<ID=PR,Number=1,Type=Integer,Description="# permutations yielding a smaller PCHI2.">
+##INFO=<ID=QBD,Number=1,Type=Float,Description="Quality by Depth: QUAL/#reads">
+##INFO=<ID=RPB,Number=1,Type=Float,Description="Read Position Bias">
+##INFO=<ID=MDV,Number=1,Type=Integer,Description="Maximum number of high-quality nonRef reads in samples">
+##INFO=<ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias (v2) for filtering splice-site artefacts in RNA-seq data. Note: this version may be broken.">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
+##FORMAT=<ID=GL,Number=3,Type=Float,Description="Likelihoods for RR,RA,AA genotypes (R=ref,A=alt)">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="# high-quality bases">
+##FORMAT=<ID=DV,Number=1,Type=Integer,Description="# high-quality non-reference bases">
+##FORMAT=<ID=SP,Number=1,Type=Integer,Description="Phred-scaled strand bias P-value">
+##FORMAT=<ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods">
+##INFO=<ID=PR,Number=1,Type=Integer,Description="# permutations yielding a smaller PCHI2.">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	Data/Genes/KIR2DS4/Aligned/KIR2DS4_KIR00496.sorted.bam
+chr19:KIR2DS4	1289	.	A	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1310	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1315	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1329	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1330	.	C	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1332	.	G	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1363	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1368	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1372	.	C	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1402	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1407	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1410	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1424	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1426	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1428	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1429	.	C	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1437	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1438	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1445	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1447	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1448	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1456	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1461	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1464	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1471	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1473	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1486	.	C	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1487	.	C	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1506	.	C	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1536	.	C	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1537	.	A	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1544	.	T	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1553	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1556	.	A	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1559	.	C	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1579	.	T	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1600	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1613	.	T	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1621	.	G	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1631	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1635	.	C	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1662	.	G	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1670	.	A	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1686	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1689	.	A	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1696	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1728	.	C	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1734	.	C	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1736	.	G	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1756	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1768	.	C	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1773	.	G	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1786	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1789	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1806	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1812	.	G	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1816	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1817	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1825	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1850	.	G	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1854	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1867	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1872	.	G	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1881	.	C	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1888	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1911	.	T	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1915	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	1918	.	A	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	2457	.	T	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	3021	.	T	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	3530	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	3617	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	4488	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	4739	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	6714	.	C	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	7011	.	TCC	TCCCGGAGCTCCTATGACATGTACC	22.5	.	INDEL;IS=1,1.000000;DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-37.5	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	7818	.	T	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	9846	.	C	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR2DS4	11661	.	C	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6

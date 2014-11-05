@@ -1,0 +1,78 @@
+##fileformat=VCFv4.1
+##samtoolsVersion=0.1.19-44428cd
+##reference=file://Data/Genes/KIR3DL2/KIR3DL2.fasta
+##contig=<ID=chr19:KIR3DL2,length=16369>
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw read depth">
+##INFO=<ID=DP4,Number=4,Type=Integer,Description="# high-quality ref-forward bases, ref-reverse, alt-forward and alt-reverse bases">
+##INFO=<ID=MQ,Number=1,Type=Integer,Description="Root-mean-square mapping quality of covering reads">
+##INFO=<ID=FQ,Number=1,Type=Float,Description="Phred probability of all samples being the same">
+##INFO=<ID=AF1,Number=1,Type=Float,Description="Max-likelihood estimate of the first ALT allele frequency (assuming HWE)">
+##INFO=<ID=AC1,Number=1,Type=Float,Description="Max-likelihood estimate of the first ALT allele count (no HWE assumption)">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##INFO=<ID=IS,Number=2,Type=Float,Description="Maximum number of reads supporting an indel and fraction of indel reads">
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes for each ALT allele, in the same order as listed">
+##INFO=<ID=G3,Number=3,Type=Float,Description="ML estimate of genotype frequencies">
+##INFO=<ID=HWE,Number=1,Type=Float,Description="Chi^2 based HWE test P-value based on G3">
+##INFO=<ID=CLR,Number=1,Type=Integer,Description="Log ratio of genotype likelihoods with and without the constraint">
+##INFO=<ID=UGT,Number=1,Type=String,Description="The most probable unconstrained genotype configuration in the trio">
+##INFO=<ID=CGT,Number=1,Type=String,Description="The most probable constrained genotype configuration in the trio">
+##INFO=<ID=PV4,Number=4,Type=Float,Description="P-values for strand bias, baseQ bias, mapQ bias and tail distance bias">
+##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
+##INFO=<ID=PC2,Number=2,Type=Integer,Description="Phred probability of the nonRef allele frequency in group1 samples being larger (,smaller) than in group2.">
+##INFO=<ID=PCHI2,Number=1,Type=Float,Description="Posterior weighted chi^2 P-value for testing the association between group1 and group2 samples.">
+##INFO=<ID=QCHI2,Number=1,Type=Integer,Description="Phred scaled PCHI2.">
+##INFO=<ID=PR,Number=1,Type=Integer,Description="# permutations yielding a smaller PCHI2.">
+##INFO=<ID=QBD,Number=1,Type=Float,Description="Quality by Depth: QUAL/#reads">
+##INFO=<ID=RPB,Number=1,Type=Float,Description="Read Position Bias">
+##INFO=<ID=MDV,Number=1,Type=Integer,Description="Maximum number of high-quality nonRef reads in samples">
+##INFO=<ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias (v2) for filtering splice-site artefacts in RNA-seq data. Note: this version may be broken.">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
+##FORMAT=<ID=GL,Number=3,Type=Float,Description="Likelihoods for RR,RA,AA genotypes (R=ref,A=alt)">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="# high-quality bases">
+##FORMAT=<ID=DV,Number=1,Type=Integer,Description="# high-quality non-reference bases">
+##FORMAT=<ID=SP,Number=1,Type=Integer,Description="Phred-scaled strand bias P-value">
+##FORMAT=<ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods">
+##INFO=<ID=PR,Number=1,Type=Integer,Description="# permutations yielding a smaller PCHI2.">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	Data/Genes/KIR3DL2/Aligned/KIR3DL2_KIR00464.sorted.bam
+chr19:KIR3DL2	280	.	G	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	461	.	G	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	582	.	CTGGGCCTGGAGTGGAGATATGGGCCTGGAGTGGAGATATGGGTCTGATGTGGAGATATGGGCCTGGAGTGGAGATATGGGCCTGGAGTGGAGATATGGGCCTAGAGGGGAGATCTGGGCCTGGAGTGGAGATATGGGTCTGATGTGGAGATATGGGCCTGGAGTGGAGATATGGGCCTGGAGTGGAGATAGGGGCCTGGAGTGGAGATATGGGCCTGGAGTGGAGAT	CTGGGCCTGGAGTGGAGATATGGGTCTGATGTGGAGATATGGGCCTGGAGTGGAGATATGGGCCTGGAGTGGAGATATGGGCCTAGAGGGGAGATCTGGGCCTGGAGTGGAGATATGGGTCTGATGTGGAGATATGGGCCTGGAGTGGAGATATGGGCCTGGAGTGGAGATAGGGGCCTGGAGTGGAGATATGGGCCTGGAGTGGAGAT	22.5	.	INDEL;IS=1,1.000000;DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-37.5	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	754	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	1057	.	G	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	1197	.	T	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	2193	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	2555	.	T	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	2813	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	3247	.	C	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	3658	.	G	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	4748	.	C	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	4854	.	a	aTGAAGAT	22.5	.	INDEL;IS=1,1.000000;DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-37.5	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	6516	.	T	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	6629	.	C	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	7010	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	7185	.	C	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	8015	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	9405	.	G	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	9422	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	9495	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	9606	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10219	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10505	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10579	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10589	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10599	.	TGC	T	3.25	.	INDEL;IS=1,1.000000;DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-37.5	GT:PL:GQ	0/1:38,3,0:4
+chr19:KIR3DL2	10602	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10678	.	T	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10688	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10706	.	T	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10713	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10765	.	C	T	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10787	.	A	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10802	.	A	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10861	.	T	G	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10991	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	10999	.	G	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	11004	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	14907	.	G	A	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
+chr19:KIR3DL2	15921	.	T	C	30	.	DP=1;AF1=1;AC1=2;DP4=0,0,1,0;MQ=60;FQ=-30	GT:PL:GQ	1/1:60,3,0:6
