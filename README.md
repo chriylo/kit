@@ -9,17 +9,17 @@ samtools: http://sourceforge.net/projects/samtools/files/
 Quickstart
 
 		java -jar KITCN.jar
-        -r1 Data/Quickstart/sample_fir.fastq \
-        -r2 Data/Quickstart/sample_sec.fastq \
-        -s sample_name
+        -r1 data/Quickstart/sample_fir.fastq \
+        -r2 data/Quickstart/sample_sec.fastq \
+        -s sample
         
 		java -jar KITAT.jar
-        -r1 Data/Quickstart/sample_fir.fastq \
-        -r2 Data/Quickstart/sample_sec.fastq \
-        -s sample_name \
+        -r1 data/Quickstart/sample_fir.fastq \
+        -r2 data/Quickstart/sample_sec.fastq \
+        -s sample \
         -c A_A
-        -d Data/Quickstart/Temp/ \
-        -o Data/Quickstart/Out/
+        -d data/Quickstart/Temp/ \
+        -o data/Quickstart/Out/
 
 
 
