@@ -1,7 +1,6 @@
 package typing;
 
 import barcodeFunctions.*;
-import clusterFunctions.*;
 import distanceFunction.*;
 import generator.*;
 import typing.TemplateScores;
@@ -731,38 +730,38 @@ public class Typing {
 		repetitiveKmerIndices = getIndicesOfRepetitiveKmers(Typing.templateBarcodes);
 
 
-		aggKmers = new HashMap<Integer, EntryWeights>();
-		for (int numGeneTest = 0; numGeneTest < Typing.geneTests.size(); numGeneTest+=1) {
-			ArrayList<String> genes = Typing.geneTests.get(numGeneTest);
-			double[] weights = new double[Typing.templateBarcodes[0].length];
-			int[] templateCopyNumber = Typing.getCopyNumber(Typing.getNames(), Typing.templateRegions, genes);
-			
-			int numBarcodes = 0;
-			for (int i = 0; i < templateCopyNumber.length; ++i) {
-				if (templateCopyNumber[i]>0) { numBarcodes+=1; }
-			}
-					
-			double[] scaledTemplateBarcode = new double[Typing.templateBarcodes[0].length];
-			double[] var = new double[Typing.templateBarcodes[0].length];
-			Arrays.fill(scaledTemplateBarcode, 0);
-			for (int i = 0; i < Typing.templateBarcodes.length; ++i) {
-				if (templateCopyNumber[i]>0) {
-					for (int j = 0; j < Typing.templateBarcodes[0].length; ++j) {
-						scaledTemplateBarcode[j] += (Typing.templateBarcodes[i][j])/templateCopyNumber[i];
-						var[j] += Math.pow(Typing.templateBarcodes[i][j]/templateCopyNumber[i],2);
-					}
-				}
-			}
-			for (int i = 0; i < scaledTemplateBarcode.length; ++i) {
-				scaledTemplateBarcode[i] = scaledTemplateBarcode[i]/numBarcodes;
-				double blah = Math.abs(var[i]/numBarcodes - Math.pow(scaledTemplateBarcode[i],2));
-				if (blah<=0.25) {
-					weights[i] = 1;
-				} else { weights[i] = 0; } 
-			}
-			EntryWeights eweights = new EntryWeights(weights);
-			aggKmers.put(numGeneTest, eweights);
-		}
+//		aggKmers = new HashMap<Integer, EntryWeights>();
+//		for (int numGeneTest = 0; numGeneTest < Typing.geneTests.size(); numGeneTest+=1) {
+//			ArrayList<String> genes = Typing.geneTests.get(numGeneTest);
+//			double[] weights = new double[Typing.templateBarcodes[0].length];
+//			int[] templateCopyNumber = Typing.getCopyNumber(Typing.getNames(), Typing.templateRegions, genes);
+//			
+//			int numBarcodes = 0;
+//			for (int i = 0; i < templateCopyNumber.length; ++i) {
+//				if (templateCopyNumber[i]>0) { numBarcodes+=1; }
+//			}
+//					
+//			double[] scaledTemplateBarcode = new double[Typing.templateBarcodes[0].length];
+//			double[] var = new double[Typing.templateBarcodes[0].length];
+//			Arrays.fill(scaledTemplateBarcode, 0);
+//			for (int i = 0; i < Typing.templateBarcodes.length; ++i) {
+//				if (templateCopyNumber[i]>0) {
+//					for (int j = 0; j < Typing.templateBarcodes[0].length; ++j) {
+//						scaledTemplateBarcode[j] += (Typing.templateBarcodes[i][j])/templateCopyNumber[i];
+//						var[j] += Math.pow(Typing.templateBarcodes[i][j]/templateCopyNumber[i],2);
+//					}
+//				}
+//			}
+//			for (int i = 0; i < scaledTemplateBarcode.length; ++i) {
+//				scaledTemplateBarcode[i] = scaledTemplateBarcode[i]/numBarcodes;
+//				double blah = Math.abs(var[i]/numBarcodes - Math.pow(scaledTemplateBarcode[i],2));
+//				if (blah<=0.25) {
+//					weights[i] = 1;
+//				} else { weights[i] = 0; } 
+//			}
+//			EntryWeights eweights = new EntryWeights(weights);
+//			aggKmers.put(numGeneTest, eweights);
+//		}
 //		
 //		uniqueKmers = new HashMap<Integer, EntryWeights>();
 //		pathToTemplateBarcodes = "Data/Barcodes/Reference/reference50.barcod";
@@ -785,7 +784,7 @@ public class Typing {
 			}
 		}
 		
-		System.out.println(all.size());
+		//System.out.println(all.size());
 		for (int otherGeneIndex = 0; otherGeneIndex < geneTests.size(); ++otherGeneIndex) {
 		if (otherGeneIndex != geneTestIndex) {
 			for (int g = 0; g < geneTests.get(otherGeneIndex).size(); ++g) {
@@ -799,7 +798,7 @@ public class Typing {
 		}
 		}
 			
-		System.out.println(all.size());
+		//System.out.println(all.size());
 		for (int i = 0; i < reference.length; ++i) {
 			if (reference[i]>0){
 				if (all.contains(i)) {
@@ -807,7 +806,7 @@ public class Typing {
 				}
 			}
 		}
-		System.out.println(all.size());
+		//System.out.println(all.size());
 
 		return all;
 		

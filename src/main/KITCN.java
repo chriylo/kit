@@ -84,8 +84,8 @@ public class KITCN {
 			if(cmd.hasOption("h"))
 				usage_exit();
 			
-			if(cmd.hasOption("sample")) {
-				p.sample = cmd.getOptionValue("sample"); 
+			if(cmd.hasOption("s")) {
+				p.sample = cmd.getOptionValue("s"); 
 			} 
 			
 			if(cmd.hasOption("b")) {

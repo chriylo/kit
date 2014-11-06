@@ -100,7 +100,7 @@ public class AlleleScorer {
 	}
 	
 	public AlleleScorer(int geneIndex, String name, String outputdir) throws FileNotFoundException {
-		debug = Boolean.TRUE;
+		debug = Boolean.FALSE;
 		this.geneIndex = geneIndex;
 		sampleCopyNumber = 2;
 		//sampleVariants = new HashMap<Integer, Variant>();
@@ -111,7 +111,7 @@ public class AlleleScorer {
 		this.name = name;
 		this.outputdir = outputdir;
 		this.ps = new PrintStream(this.outputdir + this.geneIndex + "." + this.name + ".out3" );
-		this.dps = new PrintStream(this.outputdir+ this.geneIndex + "."  + this.name + ".debug3" );
+		//this.dps = new PrintStream(this.outputdir+ this.geneIndex + "."  + this.name + ".debug3" );
 
 	}
 	

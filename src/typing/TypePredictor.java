@@ -48,7 +48,7 @@ public class TypePredictor {
 		double[] sampleCopyValues = new double[Typing.geneTests.size()];
 		
 		ArrayList<Integer> badKmers = new ArrayList<Integer>();
-		for (int i = 0; i < Typing.repetitiveKmerIndices.size(); ++i) { badKmers.add(Typing.repetitiveKmerIndices.get(i)); }
+		//for (int i = 0; i < Typing.repetitiveKmerIndices.size(); ++i) { badKmers.add(Typing.repetitiveKmerIndices.get(i)); }
 		
 //		ArrayList<Integer> geneKmerIndices = new ArrayList<Integer>();
 //		for (int g = 0; g < Typing.templateBarcodes[0].length; ++g) {
@@ -67,18 +67,19 @@ public class TypePredictor {
 				String[] templateGeneTypes = Typing.getPresenceAbsenceTypes(Typing.getNames(), Typing.templateRegions, genes);
 				String[] diploidTemplateGeneTypes = Typing.getDiploidPresenceAbsenceTypes(Typing.getNames(), Typing.templateRegions, genes);
 
-				ArrayList<Integer> geneKmerIndices = new ArrayList<Integer>();
-				for (int g = 0; g < genes.size(); ++g) {
-					ArrayList<Integer> temp = Typing.geneIndicesMap.get(genes.get(g));
-					for (int t = 0; t < temp.size(); ++t) { geneKmerIndices.add(temp.get(t)); } 
-				}
-				
-				ArrayList<Integer> geneFilteredKmerIndices = getIndicesOfGenesFilteredKmers(geneKmerIndices, Typing.templateBarcodes, templateGeneTypes);
+//				ArrayList<Integer> geneKmerIndices = new ArrayList<Integer>();
+//				for (int g = 0; g < genes.size(); ++g) {
+//					ArrayList<Integer> temp = Typing.geneIndicesMap.get(genes.get(g));
+//					for (int t = 0; t < temp.size(); ++t) { geneKmerIndices.add(temp.get(t)); } 
+//				}
+//				
+//				ArrayList<Integer> geneFilteredKmerIndices = getIndicesOfGenesFilteredKmers(geneKmerIndices, Typing.templateBarcodes, templateGeneTypes);
+				ArrayList<Integer> geneFilteredKmerIndices = getIndicesOfGenesFilteredKmers(Typing.getUniqueKmers(numGeneTest), Typing.templateBarcodes, templateGeneTypes);
 
 				EntryWeights filteredEntryWeights  = getEntryWeights(Test5.getDiploidBarcodes(Typing.templateBarcodes), geneFilteredKmerIndices, badKmers);
-				if (numGeneTest==8) {
-					filteredEntryWeights = getIntersectionEntryWeights(filteredEntryWeights, Typing.aggKmers.get(numGeneTest));
-				}
+//				if (numGeneTest==8) {
+//					filteredEntryWeights = getIntersectionEntryWeights(filteredEntryWeights, Typing.aggKmers.get(numGeneTest));
+//				}
 				//System.out.println("Gene:"+numGeneTest);
 				//filteredEntryWeights.printNonZeroIndices();
 				//System.out.println(filteredEntryWeights.getNumWeightedEntries());	

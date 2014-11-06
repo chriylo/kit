@@ -1,7 +1,6 @@
 package typing;
 
 import barcodeFunctions.*;
-import clusterFunctions.*;
 import distanceFunction.*;
 import typing.TemplateScores;
 

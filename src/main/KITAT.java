@@ -66,8 +66,8 @@ public class KITAT {
 			p.g = "Data/Genes/";
 			p.k = 50;
 			
-			if(cmd.hasOption("sample")) {
-				p.sample = cmd.getOptionValue("sample"); 
+			if(cmd.hasOption("s")) {
+				p.sample = cmd.getOptionValue("s"); 
 			} 
 			
 			if(cmd.hasOption("c")) {

@@ -3,7 +3,6 @@ package typing;
 import java.io.File;
 import java.util.*;
 
-import clusterFunctions.*;
 import distanceFunction.EntryWeights;
 import distanceFunction.EntrywiseVecDistance;
 import distanceFunction.HammingClusterBarcodeDistance;
