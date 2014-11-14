@@ -165,7 +165,7 @@ public class TypePredictor {
 //				for (int t = 0; t < temp.size(); ++t) { geneKmerIndices.add(temp.get(t)); } 
 //			}
 //			ArrayList<Integer> geneFilteredKmerIndices = getIndicesOfGenesFilteredKmers(geneKmerIndices, Typing.templateBarcodes, templateGeneTypes);
-			ArrayList<Integer> geneFilteredKmerIndices = getIndicesOfGenesFilteredKmers(Typing.getUniqueKmers(numGeneTest), Typing.templateBarcodes, templateGeneTypes);
+			ArrayList<Integer> geneFilteredKmerIndices = getIndicesOfGenesFilteredKmers(Typing.uniqueKmers.get(numGeneTest), Typing.templateBarcodes, templateGeneTypes);
 			
 			EntryWeights filteredEntryWeights  = getEntryWeights(Typing.templateBarcodes, geneFilteredKmerIndices, badKmers);
 			//EntryWeights finalEntryWeights = getIntersectionEntryWeights(filteredEntryWeights, Typing.aggKmers.get(numGeneTest));

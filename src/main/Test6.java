@@ -45,7 +45,7 @@ public class Test6 {
 //		getTrieWithSource();
 		
 //		testHaploid("Scaled");
-//		testHaploid("5x");
+		testHaploid("5x");
 //		testHaploid("15x");
 //		testHaploid("30x");
 //		testHaploid("50x");
@@ -71,29 +71,29 @@ public class Test6 {
 	        System.out.println(gr.readLine());
 		}
 		**/
-		Params2 params = new Params2();
-		params.setk(50);
-		params.setSample("FH05A");
-		String type1 = Typing.templateTypes.get("FH05A");
-		int[] c = Typing.getTypeCopyNumbers().get(type1);
-		params.setCopyNumber(c);
-		params.setTrie("Data/Tries/trieSource50");
-		
-		params.setGenes("Data/Genes/");
-		params.setOutputDir("Data/FH05A_TempMix/");
-		
-		params.setReadsDir("Data/FH05A_Temp/"); 
-		String reads1 = "Data/FH05A/FH05A" + "_fir.fastq";
-		params.setRead1(reads1);
-		String reads2 = "Data/FH05A/FH05A" + "_sec.fastq";
-		params.setRead2(reads2);
+//		Params2 params = new Params2();
+//		params.setk(50);
+//		params.setSample("FH05A");
+//		String type1 = Typing.templateTypes.get("FH05A");
+//		int[] c = Typing.getTypeCopyNumbers().get(type1);
+//		params.setCopyNumber(c);
+//		params.setTrie("Data/Tries/trieSource50");
+//		
+//		params.setGenes("Data/Genes/");
+//		params.setOutputDir("Data/FH05A_TempMix/");
+//		
+//		params.setReadsDir("Data/FH05A_Temp/"); 
+//		String reads1 = "Data/FH05A/FH05A" + "_fir.fastq";
+//		params.setRead1(reads1);
+//		String reads2 = "Data/FH05A/FH05A" + "_sec.fastq";
+//		params.setRead2(reads2);
 			
 //		AlleleCaller.filterReads(params);			
 //		//TODO: Filtered reference reads
 			
 //		AlleleCaller.preprocess(params); 
 		
-		AlleleCaller.callAllele(params);
+//		AlleleCaller.callAllele(params);
 		
 	}
 
@@ -161,19 +161,27 @@ public static void getTrieWithSource() throws IOException {
 	}
 	
 	public static void testHaploid(String cov) throws IOException {
-//		String cov = "5x";
-		Params2 params = new Params2();
-		params.setk(50);
+		String resultsDirName = "Data/AlleleCalling"+cov+"/";
+		File resultsDir = new File(resultsDirName);
+		if (!resultsDir.exists()) { resultsDir.mkdir(); }
+		
+		Params3 params = new Params3();
 		for (int template1 = 0; template1 < Typing.templates.size(); ++template1) {
 		String template1Name = Typing.templates.get(template1);
 		params.setSample(template1Name);
 		String type1 = Typing.templateTypes.get(template1Name);
 		int[] c = Typing.getTypeCopyNumbers().get(type1);
 		params.setCopyNumber(c);
-		params.setTrie("Data/Tries/trieSource50");
 		
+		params.setTrie("Data/Tries/trieSource50");
 		params.setGenes("Data/Genes/");
-		params.setOutputDir("Data/AlleleCalling"+cov+"/TempMix/");
+		params.setk(50);
+		
+		
+		String outputDirName = "Data/AlleleCalling"+cov+"/Out/";
+		File outputDir = new File(outputDirName);
+		if (!outputDir.exists()) { outputDir.mkdir(); }
+		params.setOutputDir(outputDirName);
 		
 		if (cov.contains("Scaled")) {
 //			for (int geneIndex = 0; geneIndex < Typing.getGeneTests().size(); ++geneIndex) {
@@ -223,21 +231,24 @@ public static void getTrieWithSource() throws IOException {
 //		}			
 		}
 		else {
-			params.setReadsDir("Data/AlleleCalling"+cov+"/Temp/"); 
+			String readsDirName = "Data/AlleleCalling"+cov+"/Temp/";
+			File readsDir = new File(readsDirName);
+			if (!readsDir.exists()) { readsDir.mkdir(); }
+			params.setReadsDir(readsDirName); 
 			String reads1 = "Data/TemplateReads"+cov+"/"+template1Name + "/" + template1Name + "_fir.fastq";
 			params.setRead1(reads1);
 			String reads2 = "Data/TemplateReads"+cov+"/" +template1Name + "/"+ template1Name + "_sec.fastq";
 			params.setRead2(reads2);
 			
-//			AlleleCaller.filterReads(params);			
+			KITAT.filterReads(params);			
 //			//TODO: Filtered reference reads
 			
-			AlleleCaller.preprocess(params);
+			KITAT.preprocess(params);
 			
 
 		}
 		
-		AlleleCaller.callAllele(params);
+		KITAT.callAllele(params);
 		
 	}
 	}
@@ -249,9 +260,7 @@ public static void getTrieWithSource() throws IOException {
 	 * Test all diploid templates
 	 */
 	public static void testDiploid(String cov) throws IOException {
-		//String cov = "50x";
-		Params2 params = new Params2();
-		params.setk(50);
+		Params3 params = new Params3();
 		for (int template1 = 0; template1 < Typing.templates.size(); ++template1) {
 //		int template1 = 0;
 			for (int template2 = template1; template2 < Typing.templates.size(); ++template2) {
@@ -268,52 +277,50 @@ public static void getTrieWithSource() throws IOException {
 				Arrays.sort(temp);
 				int[] c = Typing.getDiploidTypeCopyNumbers().get(temp[0]+"_"+temp[1]);
 				params.setCopyNumber(c);
-				//params.setTrie("Data/Tries/trieSource50");
-				
-				params.setGenes("Data/Genes/");
-				params.setOutputDir("Data/AlleleCalling"+cov+"/TempMix/");
+
+				params.setOutputDir("Data/AlleleCalling"+cov+"/Out/");
 				
 				
 				//Filter reads first
-				//for (int geneIndex = 0; geneIndex < Typing.getGeneTests().size(); ++geneIndex) {
-					int geneIndex = 7;
+				for (int geneIndex = 0; geneIndex < Typing.getGeneTests().size(); ++geneIndex) {
+					//int geneIndex = 7;
 					if (cov.contains("Scaled")) {
-						String geneName = Typing.getGeneTests().get(geneIndex).get(0);
-				        String geneRef = params.g + geneName + "/" + geneName + ".fasta";
-				        
-				        Process p; String[] cmd = new String[3]; cmd[0] = "/bin/sh"; cmd[1] = "-c"; String s;
-
-						String bam1 = params.o + geneIndex + "." + template1Name + ".bam";
-						String bam2 = params.o + geneIndex + "." + template2Name + ".bam";
-						String dipbam = params.o + geneIndex + "." + sample + ".bam";
-						cmd[2] = "samtools merge -f " + dipbam + " " + bam1 + " " + bam2;
-						p = Runtime.getRuntime().exec(cmd);
-						try {
-							p.waitFor();
-							p.destroy();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						
-						String alignedsortedbam = params.o + geneIndex + "." + sample + ".sorted";
-						cmd[2] = "samtools sort " + dipbam + " " + alignedsortedbam;
-						p = Runtime.getRuntime().exec(cmd);
-						try {
-							p.waitFor();
-							p.destroy();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						
-						alignedsortedbam = alignedsortedbam + ".bam";
-						cmd[2] = "samtools index " + alignedsortedbam;
-						p = Runtime.getRuntime().exec(cmd);
-						try {
-							p.waitFor();
-							p.destroy();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
+//						String geneName = Typing.getGeneTests().get(geneIndex).get(0);
+//				        String geneRef = params.g + geneName + "/" + geneName + ".fasta";
+//				        
+//				        Process p; String[] cmd = new String[3]; cmd[0] = "/bin/sh"; cmd[1] = "-c"; String s;
+//
+//						String bam1 = params.o + geneIndex + "." + template1Name + ".bam";
+//						String bam2 = params.o + geneIndex + "." + template2Name + ".bam";
+//						String dipbam = params.o + geneIndex + "." + sample + ".bam";
+//						cmd[2] = "samtools merge -f " + dipbam + " " + bam1 + " " + bam2;
+//						p = Runtime.getRuntime().exec(cmd);
+//						try {
+//							p.waitFor();
+//							p.destroy();
+//						} catch (InterruptedException e) {
+//							e.printStackTrace();
+//						}
+//						
+//						String alignedsortedbam = params.o + geneIndex + "." + sample + ".sorted";
+//						cmd[2] = "samtools sort " + dipbam + " " + alignedsortedbam;
+//						p = Runtime.getRuntime().exec(cmd);
+//						try {
+//							p.waitFor();
+//							p.destroy();
+//						} catch (InterruptedException e) {
+//							e.printStackTrace();
+//						}
+//						
+//						alignedsortedbam = alignedsortedbam + ".bam";
+//						cmd[2] = "samtools index " + alignedsortedbam;
+//						p = Runtime.getRuntime().exec(cmd);
+//						try {
+//							p.waitFor();
+//							p.destroy();
+//						} catch (InterruptedException e) {
+//							e.printStackTrace();
+//						}
 				        
 					} else {
 					
@@ -363,16 +370,17 @@ public static void getTrieWithSource() throws IOException {
 					
 					//TODO: Filtered reference reads
 					
-					AlleleCaller.preprocess(params);			
+					KITAT.preprocess(params);			
 
 					}
-				//}
+				}
 				
 				
-				AlleleCaller.callAllele(params);
+				KITAT.callAllele(params);
 							
 			}
 		}
+		
 			
 	}
 		

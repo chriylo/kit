@@ -323,8 +323,7 @@ public class KITAT {
 
 			HashMap<Integer, Allele> allGeneReference = AlleleTypingMix.allGeneReference;
 			HashMap<Integer, HashMap<String, Allele>> allGeneAlleles = AlleleTypingMix.allGeneAlleles;
-			allGeneReference.get(7).removeVariants(9181, 11384);
-			//allGeneReference.get(14).removeVariants(2777, 16347);
+			allGeneReference.get(7).removeVariants(9181, 11384);	
 			HashMap<String, Allele> tempAlleles = new HashMap<String, Allele>();
 			for (Iterator it = allGeneAlleles.get(7).keySet().iterator(); it.hasNext(); ) {
 				String alleleName = (String) it.next();

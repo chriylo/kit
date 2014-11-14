@@ -33,13 +33,13 @@ public class Test5 {
 
 
 	public static void main(String[] args) throws IOException {
-		int c = 50;
+		int c = 5;
 		
 		/*** Inputs ***/
 		int k = 50;
 		
-		String pathToReads = "Data/Barcodes/TemplateReads"+c+"x_RefVar1Reads"+c+"x_"+k;
-		String pathToReads2 = "Data/Barcodes/TemplateReads"+c+"x_RefVar2Reads"+c+"x_"+k;
+		String pathToReads = "Data2/Barcodes/TemplateReads"+c+"x_RefVar1Reads"+c+"x_"+k;
+		String pathToReads2 = "Data2/Barcodes/TemplateReads"+c+"x_RefVar2Reads"+c+"x_"+k;
 		//String pathTo1k = "Data/Barcodes/deCODEtrios/";
 		
 		String pathTo1k = "Data/Barcodes/deCODEpop/";
@@ -49,11 +49,11 @@ public class Test5 {
 		TypePredictor predictor = new TypePredictor();
 		
 				
-		testHaploidScaled(predictor);
+		//testHaploidScaled(predictor);
 		//testHaploidSimulated(predictor, pathToReads);
 		//testHaploidSimulated(predictor, pathToReads2);
 		//testDiploidScaled(predictor);
-		//testDiploidSimulated(predictor, pathToReads, pathToReads2);
+		testDiploidSimulated(predictor, pathToReads, pathToReads2);
 		//testTrios(predictor, pathToTrios);
 		//test1k(predictor, pathTo1k);
 		
@@ -184,21 +184,14 @@ public class Test5 {
 		ArrayList<String> diploidReadTypes = getDiploidTypes(readBarcodeFiles, readBarcodeFiles2);
 		HashMap<String, String> diploidTypeToCopyNumbers = Typing.getDiploidTypeToCopyNumbers();
 
-		ArrayList<Integer> blah = new ArrayList<Integer>();
-		blah.add(110);
-		blah.add(122);
-		
-		
 		
 		for (int numSample = 0; numSample < diploidReadBarcodes.length; ++numSample) {
 			
-			//if (blah.contains(numSample)) {
 			System.out.print(numSample + "\t");
 			System.out.print(diploidReadNames.get(numSample));
 			System.out.print("\t" + diploidReadTypes.get(numSample));
 			System.out.print("\t" + diploidTypeToCopyNumbers.get(diploidReadTypes.get(numSample)));
 			predictor.typeSample(diploidReadBarcodes[numSample]);
-			//}
 		}
 	}
 	

@@ -35,9 +35,9 @@ public class Typing {
 	public static HashMap<String, HashMap<String, int[]>> templateRegions = new HashMap<String, HashMap<String, int[]>>();
 	public static HashMap<String, ArrayList<Integer>> geneIndicesMap;
 	public static HashMap<String, HashMap<String, ArrayList<Integer>>> templateRegionsIndicesMap;
-	public static ArrayList<Integer> repetitiveKmerIndices;
-	public static HashMap<Integer, EntryWeights> aggKmers; 
-	public static HashMap<Integer, EntryWeights> uniqueKmers; 
+	//public static ArrayList<Integer> repetitiveKmerIndices;
+	//public static HashMap<Integer, EntryWeights> aggKmers; 
+	public static HashMap<Integer, ArrayList<Integer>> uniqueKmers; 
 	public static ArrayList<String> templates = new ArrayList<String>();
 	
 	public static int[][] templateBarcodes;
@@ -727,7 +727,7 @@ public class Typing {
 			}
 		}
 		
-		repetitiveKmerIndices = getIndicesOfRepetitiveKmers(Typing.templateBarcodes);
+//		repetitiveKmerIndices = getIndicesOfRepetitiveKmers(Typing.templateBarcodes);
 
 
 //		aggKmers = new HashMap<Integer, EntryWeights>();
@@ -763,11 +763,11 @@ public class Typing {
 //			aggKmers.put(numGeneTest, eweights);
 //		}
 //		
-//		uniqueKmers = new HashMap<Integer, EntryWeights>();
+		uniqueKmers = new HashMap<Integer, ArrayList<Integer>>();
 //		pathToTemplateBarcodes = "Data/Barcodes/Reference/reference50.barcod";
-//		for (int numGeneTest = 0; numGeneTest < Typing.geneTests.size(); numGeneTest+=1) {
-//
-//		}
+		for (int numGeneTest = 0; numGeneTest < Typing.geneTests.size(); numGeneTest+=1) {
+			uniqueKmers.put(numGeneTest, getUniqueKmers(numGeneTest));
+		}
 	}
 	
 	public static ArrayList<Integer> getUniqueKmers( int geneTestIndex) throws IOException {
