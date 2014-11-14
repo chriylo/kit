@@ -33,7 +33,7 @@ KIT-CN predicts the copy number of KIR genes by counting indicative strings. KIT
 
 Options
 -------------
-	-r1		fasta/q file of paired end reads (first paired end)
+	-r1		fasta/q file of paired end reads (first paired end) 
 	-r2 	fasta/q file of paired end reads (second paired end)
 	-r 		fasta/q file of paired end reads (unpaired reads)
 	-b 		bam/sam file of reads
@@ -41,7 +41,25 @@ Options
 	-s		sample name
 
 
+=======
+KIT-AT
+=========
 
+KIT-AT predicts the allele for each copy of each gene using a maximum likelihood approach choosing among a database of alleles. There are three steps to KIT-AT. For each gene, these three steps are run. The first step is to filter the wgs reads sampled from the gene region of interest using unique indicative strings. Then the filtered reads are aligned to a gene reference. Finally the reads are evaluated at the polymorphic sites in order to choose the most likely set of alleles corresponding to the reads. KIT-AT uses a database of known KIR alleles. Use of custom database will be available soon. 
+
+		java -jar KITAT.jar [OPTIONS]
+
+Options
+-------------
+	-r1		fasta/q file of paired end reads (first paired end)
+	-r2 	fasta/q file of paired end reads (second paired end)
+	-r 		fasta/q file of paired end reads (unpaired reads)
+	-b 		bam/sam file of reads
+	-bai 	bam index file 
+	-s		sample name
+	-c 		kir type (output from KIT-CN)
+	-d 		temporary output directory
+	-o 		output directory
 
 
 
