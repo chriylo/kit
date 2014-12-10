@@ -38,24 +38,20 @@ public class Test5 {
 		/*** Inputs ***/
 		int k = 50;
 		
-		String pathToReads = "Data2/Barcodes/TemplateReads"+c+"x_RefVar1Reads"+c+"x_"+k;
-		String pathToReads2 = "Data2/Barcodes/TemplateReads"+c+"x_RefVar2Reads"+c+"x_"+k;
 		//String pathTo1k = "Data/Barcodes/deCODEtrios/";
-		
 		String pathTo1k = "Data/Barcodes/deCODEpop/";
 		//String pathTo1k = "Data/Barcodes/1ktrios/";
-
-		/*** Run Tests ***/
 		TypePredictor predictor = new TypePredictor();
+		test1k(predictor, pathTo1k);
 		
-				
+
+		//String pathToReads = "Data2/Barcodes/TemplateReads"+c+"x_RefVar1Reads"+c+"x_"+k;
+		//String pathToReads2 = "Data2/Barcodes/TemplateReads"+c+"x_RefVar2Reads"+c+"x_"+k;
 		//testHaploidScaled(predictor);
 		//testHaploidSimulated(predictor, pathToReads);
 		//testHaploidSimulated(predictor, pathToReads2);
 		//testDiploidScaled(predictor);
-		testDiploidSimulated(predictor, pathToReads, pathToReads2);
-		//testTrios(predictor, pathToTrios);
-		//test1k(predictor, pathTo1k);
+		//testDiploidSimulated(predictor, pathToReads, pathToReads2);
 		
 		//mainHelper(5);
 		//mainHelper(15);
@@ -74,6 +70,7 @@ public class Test5 {
 		/*** Run Tests ***/
 		TypePredictor predictor = new TypePredictor();
 		
+		//testHaploidSimulated(predictor, pathToReads);
 		testDiploidSimulated(predictor, pathToReads, pathToReads2);
 
 	}
@@ -110,10 +107,10 @@ public class Test5 {
 	
 	public static void testHaploidScaled(TypePredictor predictor) throws IOException {
 		
-		int[][] templateBarcodes = Typing.templateBarcodes;
-		ArrayList<String> templateNames = Typing.getNames();
+		int[][] templateBarcodes = Typing.getBarcodes();
+		ArrayList<String> templateNames = Typing.templateNames;
 		ArrayList<String> templateTypes = Typing.getTypes();
-		HashMap<String, String> typeToCopyNumbers = Typing.getTypeToCopyNumbers();
+		HashMap<String, String> typeToCopyNumbers = Typing.typeToCopyNumbers;
 		
 		int[][] scaledTemplateBarcodes = new int[templateBarcodes.length][templateBarcodes[0].length];
 		for (int i = 0; i < templateBarcodes.length; ++i) {
@@ -143,7 +140,7 @@ public class Test5 {
 		}
 		ArrayList<String> readNames = getNames(readBarcodeFiles);	
 		ArrayList<String> readTypes = getTypes(readBarcodeFiles);
-		HashMap<String, String> typeToCopyNumbers = Typing.getTypeToCopyNumbers();
+		HashMap<String, String> typeToCopyNumbers = Typing.typeToCopyNumbers;
 		
 		for (int numSample = 0; numSample < readBarcodes.length; ++numSample) {
 		//int numSample = 23;
@@ -182,7 +179,7 @@ public class Test5 {
 		int[][] diploidReadBarcodes = getDiploidBarcodes(readBarcodes, readBarcodes2);
 		ArrayList<String> diploidReadNames = getDiploidNames(readBarcodeFiles, readBarcodeFiles2);
 		ArrayList<String> diploidReadTypes = getDiploidTypes(readBarcodeFiles, readBarcodeFiles2);
-		HashMap<String, String> diploidTypeToCopyNumbers = Typing.getDiploidTypeToCopyNumbers();
+		HashMap<String, String> diploidTypeToCopyNumbers = Typing.diploidTypeToCopyNumbers;
 
 		
 		for (int numSample = 0; numSample < diploidReadBarcodes.length; ++numSample) {
@@ -198,9 +195,9 @@ public class Test5 {
 	public static void testDiploidScaled(TypePredictor predictor) throws IOException {
 		
 		int[][] diploidTemplateBarcodes = Typing.getDiploidBarcodes();
-		ArrayList<String> diploidTemplateNames = Typing.getDiploidNames();
+		ArrayList<String> diploidTemplateNames = Typing.templateDiploidNames;
 		ArrayList<String> diploidTemplateTypes = Typing.getDiploidTypes();
-		HashMap<String, String> diploidTypeToCopyNumbers = Typing.getDiploidTypeToCopyNumbers();
+		HashMap<String, String> diploidTypeToCopyNumbers = Typing.diploidTypeToCopyNumbers;
 		
 		int[][] scaledDiploidTemplateBarcodes = new int[diploidTemplateBarcodes.length][diploidTemplateBarcodes[0].length];
 		for (int i = 0; i < diploidTemplateBarcodes.length; ++i) {

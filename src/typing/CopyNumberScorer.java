@@ -85,7 +85,8 @@ public class CopyNumberScorer {
 	
 	public CopyNumberScorer() {		
 		//this.distanceCalculator = new NormalVecDistance();
-		this.distanceCalculator = new NormalCDFVecDistance();
+		//this.distanceCalculator = new NormalCDFVecDistance();
+		this.distanceCalculator = new ZVecDistance();
 	}
 
 	public double getDistance(double[] sampleBarcode, double[] templateBarcode) {
@@ -152,7 +153,7 @@ public class CopyNumberScorer {
 			typesList.add(key);
 			counter += 1;
 		}
-		return new TemplateScores(scores, entrywiseScores, scales, types, typesList, Typing.getGeneTests().size());
+		return new TemplateScores(scores, entrywiseScores, scales, types, typesList, Typing.geneTests.size());
 	}
 	
 	public TemplateScores scoreSample(double[] sampleValues) {
@@ -174,7 +175,7 @@ public class CopyNumberScorer {
 			typesList.add(key);
 			counter += 1;
 		}
-		return new TemplateScores(scores, entrywiseScores, scales, types, typesList, Typing.getGeneTests().size());
+		return new TemplateScores(scores, entrywiseScores, scales, types, typesList, Typing.geneTests.size());
 	}
 	
 //	public ArrayList<String> rankTypesOfSample(double[] sampleValues) {
@@ -275,7 +276,7 @@ public class CopyNumberScorer {
 				sampleCopyNumber[i] = 0;
 			} else {
 			int prevCopyNumber = -1;
-			double prevScore = Double.MAX_VALUE;
+			double prevScore = Double.POSITIVE_INFINITY;
 			while (true) {
 				int copyNumber = prevCopyNumber+1;
 				double temp = distanceCalculator.entryDistance(sampleValues[i], copyNumber*s);

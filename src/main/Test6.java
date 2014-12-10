@@ -45,12 +45,12 @@ public class Test6 {
 //		getTrieWithSource();
 		
 //		testHaploid("Scaled");
-		testHaploid("5x");
+//		testHaploid("5x");
 //		testHaploid("15x");
 //		testHaploid("30x");
 //		testHaploid("50x");
 //		testDiploid("Scaled");
-//		testDiploid("5x");
+		testDiploid("5x");
 //		testDiploid("15x");
 //		testDiploid("30x");
 //		testDiploid("50x");
@@ -145,8 +145,8 @@ public static void getTrieWithSource() throws IOException {
 			
 		/** To create trie of unique k-mers with source **/			
 		Trie4 t = new Trie4();
-		for (int geneIndex = 0; geneIndex < Typing.getGeneTests().size(); ++geneIndex) {
-			String geneName = Typing.getGeneTests().get(geneIndex).get(0);
+		for (int geneIndex = 0; geneIndex < Typing.geneTests.size(); ++geneIndex) {
+			String geneName = Typing.geneTests.get(geneIndex).get(0);
 			System.out.println("Gene:"+geneIndex);
 			//Create trie
 
@@ -170,7 +170,7 @@ public static void getTrieWithSource() throws IOException {
 		String template1Name = Typing.templates.get(template1);
 		params.setSample(template1Name);
 		String type1 = Typing.templateTypes.get(template1Name);
-		int[] c = Typing.getTypeCopyNumbers().get(type1);
+		int[] c = Typing.typeCopyNumbers.get(type1);
 		params.setCopyNumber(c);
 		
 		params.setTrie("Data/Tries/trieSource50");
@@ -264,6 +264,12 @@ public static void getTrieWithSource() throws IOException {
 		for (int template1 = 0; template1 < Typing.templates.size(); ++template1) {
 //		int template1 = 0;
 			for (int template2 = template1; template2 < Typing.templates.size(); ++template2) {
+						
+				String outputDirName = "Data/AlleleCalling"+cov+"/Out/";
+				File outputDir = new File(outputDirName);
+				if (!outputDir.exists()) { outputDir.mkdir(); }
+				params.setOutputDir(outputDirName);
+				
 //				int template2 = 22;
 				String template1Name = Typing.templates.get(template1);
 				String template2Name = Typing.templates.get(template2);
@@ -275,14 +281,18 @@ public static void getTrieWithSource() throws IOException {
 				temp[0] = type1;
 				temp[1] = type2;
 				Arrays.sort(temp);
-				int[] c = Typing.getDiploidTypeCopyNumbers().get(temp[0]+"_"+temp[1]);
+				int[] c = Typing.diploidTypeCopyNumbers.get(temp[0]+"_"+temp[1]);
 				params.setCopyNumber(c);
+				
+				params.setTrie("Data/Tries/trieSource50");
+				params.setGenes("Data/Genes/");
+				params.setk(50);
 
 				params.setOutputDir("Data/AlleleCalling"+cov+"/Out/");
 				
 				
 				//Filter reads first
-				for (int geneIndex = 0; geneIndex < Typing.getGeneTests().size(); ++geneIndex) {
+				for (int geneIndex = 0; geneIndex < Typing.geneTests.size(); ++geneIndex) {
 					//int geneIndex = 7;
 					if (cov.contains("Scaled")) {
 //						String geneName = Typing.getGeneTests().get(geneIndex).get(0);
@@ -342,7 +352,7 @@ public static void getTrieWithSource() throws IOException {
 					if (!(new File(outpath4)).exists()) { PrintStream tps = new PrintStream(outpath4); tps.close(); }
 
 					
-					//combine files
+//					//combine files
 					PrintStream ps, ps2;
 					ps = new PrintStream(newoutpath);
 					ps2 = new PrintStream(newoutpath2);
@@ -403,7 +413,7 @@ public static void getTrieWithSource() throws IOException {
 		
 		System.out.println("public static HashMap<Integer, HashMap<String, Allele>> allGeneAlleles;");
 		System.out.println("public static HashMap<Integer, Allele> allGeneReference;");
-		for (int geneIndex = 0; geneIndex < Typing.getGeneTests().size(); ++geneIndex) {
+		for (int geneIndex = 0; geneIndex < Typing.geneTests.size(); ++geneIndex) {
 			System.out.println("public static HashMap<String, Allele> alleles" + geneIndex + ";");
 		}
 		
@@ -412,12 +422,12 @@ public static void getTrieWithSource() throws IOException {
 		System.out.println("allGeneReference = new HashMap<Integer, Allele>();");
 		
 		
-		for (int geneIndex = 0; geneIndex < Typing.getGeneTests().size(); ++geneIndex) {
+		for (int geneIndex = 0; geneIndex < Typing.geneTests.size(); ++geneIndex) {
 		//	int geneIndex = 14;
 			
 			System.out.println("alleles" + geneIndex + " = new HashMap<String, Allele>();"); 
 			AlleleScorer a = new AlleleScorer(geneIndex);
-			File dir = new File("Data/Genes/"+Typing.getGeneTests().get(geneIndex).get(0)+"/Variants/");
+			File dir = new File("Data/Genes/"+Typing.geneTests.get(geneIndex).get(0)+"/Variants/");
 			File[] dirFiles = dir.listFiles();
 			ArrayList<String> vcfFiles = new ArrayList<String>();
 			ArrayList<String> bamFiles = new ArrayList<String>();
@@ -425,8 +435,8 @@ public static void getTrieWithSource() throws IOException {
 			for (int f = 0; f < dirFiles.length; ++f) {
 				if (dirFiles[f].getName().contains("vcf")) {
 					vcfFiles.add(dirFiles[f].getAbsolutePath());
-					bamFiles.add(new File("Data/Genes/"+Typing.getGeneTests().get(geneIndex).get(0)+"/Aligned/"+dirFiles[f].getName().split(".v")[0]+".sorted.bam").getAbsolutePath());
-					bamIndexFiles.add(new File("Data/Genes/"+Typing.getGeneTests().get(geneIndex).get(0)+"/Aligned/"+dirFiles[f].getName().split(".v")[0]+".sorted.bam.bai").getAbsolutePath());
+					bamFiles.add(new File("Data/Genes/"+Typing.geneTests.get(geneIndex).get(0)+"/Aligned/"+dirFiles[f].getName().split(".v")[0]+".sorted.bam").getAbsolutePath());
+					bamIndexFiles.add(new File("Data/Genes/"+Typing.geneTests.get(geneIndex).get(0)+"/Aligned/"+dirFiles[f].getName().split(".v")[0]+".sorted.bam.bai").getAbsolutePath());
 
 				}
 			}
@@ -448,11 +458,11 @@ public static void getTrieWithSource() throws IOException {
 		System.out.println("}"); 
 		}
 		
-		for (int geneIndex = 0; geneIndex < Typing.getGeneTests().size(); ++geneIndex) {
+		for (int geneIndex = 0; geneIndex < Typing.geneTests.size(); ++geneIndex) {
 				if (code == 1) {System.out.println("Gene " + geneIndex + " Polymorphic Sites"); }
 				//int geneIndex = 14;
 				AlleleScorer a = new AlleleScorer(geneIndex);
-				File dir = new File("Data/Genes/"+Typing.getGeneTests().get(geneIndex).get(0)+"/Variants/");
+				File dir = new File("Data/Genes/"+Typing.geneTests.get(geneIndex).get(0)+"/Variants/");
 				File[] dirFiles = dir.listFiles();
 				ArrayList<String> vcfFiles = new ArrayList<String>();
 				ArrayList<String> bamFiles = new ArrayList<String>();
@@ -460,13 +470,13 @@ public static void getTrieWithSource() throws IOException {
 				for (int f = 0; f < dirFiles.length; ++f) {
 					if (dirFiles[f].getName().contains("vcf")) {
 						vcfFiles.add(dirFiles[f].getAbsolutePath());
-						bamFiles.add(new File("Data/Genes/"+Typing.getGeneTests().get(geneIndex).get(0)+"/Aligned/"+dirFiles[f].getName().split(".v")[0]+".sorted.bam").getAbsolutePath());
-						bamIndexFiles.add(new File("Data/Genes/"+Typing.getGeneTests().get(geneIndex).get(0)+"/Aligned/"+dirFiles[f].getName().split(".v")[0]+".sorted.bam.bai").getAbsolutePath());
+						bamFiles.add(new File("Data/Genes/"+Typing.geneTests.get(geneIndex).get(0)+"/Aligned/"+dirFiles[f].getName().split(".v")[0]+".sorted.bam").getAbsolutePath());
+						bamIndexFiles.add(new File("Data/Genes/"+Typing.geneTests.get(geneIndex).get(0)+"/Aligned/"+dirFiles[f].getName().split(".v")[0]+".sorted.bam.bai").getAbsolutePath());
 	
 					}
 				}
 				a.loadAllele(vcfFiles, bamFiles, bamIndexFiles);
-				if (code == 2) {System.out.print(Typing.getGeneTests().get(geneIndex).get(0) + "&" + a.getAlleles().size() + "&");}
+				if (code == 2) {System.out.print(Typing.geneTests.get(geneIndex).get(0) + "&" + a.getAlleles().size() + "&");}
 				a.removeBadAlleles();
 				if (code == 2) {System.out.println(a.getAlleles().size()+"\\\\");}
 

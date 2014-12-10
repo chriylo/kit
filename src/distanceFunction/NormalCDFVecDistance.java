@@ -338,18 +338,29 @@ public class NormalCDFVecDistance extends EntrywiseVecDistance {
 	}
 
 	public static void main(String[] args) throws IOException{
-		NormalCDFVecDistance distCalc = new NormalCDFVecDistance();
-//		NormalDistribution dist = new NormalDistribution(14.81481481, Math.sqrt(14.81481481));
-//		System.out.println(dist.cumulativeProbability(14.81481481 - Math.abs(16.19 - 14.81481481)));
-//		System.out.println(distCalc.entryDistance(16.19,14.81481481));
+//		NormalCDFVecDistance distCalc = new NormalCDFVecDistance();
+////		NormalDistribution dist = new NormalDistribution(14.81481481, Math.sqrt(14.81481481));
+////		System.out.println(dist.cumulativeProbability(14.81481481 - Math.abs(16.19 - 14.81481481)));
+////		System.out.println(distCalc.entryDistance(16.19,14.81481481));
+//		
+//		double[] norm = {20.31,0.02,16.62,0.01,22.17,16.15,20.10,16.85,19.32,18.25,18.98,0.03,14.76,0.07,16.35};
+//		int[] cn = {2,0,2,0,3,2,2,2,2,2,2,0,2,0,2};
+//		System.out.println(distCalc.distance(norm, cn));
+//		System.out.println(norm[4] + "\t" + cn[4] + '\t' + NormalCDFVecDistance.scaleFactor3(norm, cn) + '\t' + distCalc.entryDistance(norm[7], cn[7]* NormalCDFVecDistance.scaleFactor3(norm, cn)));
+//		int[] cn2 = {2,0,2,0,2,2,2,2,2,2,2,0,2,0,2};
+//		System.out.println(distCalc.distance(norm, cn2));
+//		System.out.println(norm[4] + "\t" + cn2[4] + '\t' + NormalCDFVecDistance.scaleFactor3(norm, cn2) + '\t' + distCalc.entryDistance(norm[7], cn2[7]* NormalCDFVecDistance.scaleFactor3(norm, cn2)));
+
+		NormalDistribution dist = new NormalDistribution(.58, Math.sqrt(.58));
+		System.out.println(dist.cumulativeProbability(.55));
+		System.out.println(1-dist.cumulativeProbability(.65));
 		
-		double[] norm = {20.31,0.02,16.62,0.01,22.17,16.15,20.10,16.85,19.32,18.25,18.98,0.03,14.76,0.07,16.35};
-		int[] cn = {2,0,2,0,3,2,2,2,2,2,2,0,2,0,2};
-		System.out.println(distCalc.distance(norm, cn));
-		System.out.println(norm[4] + "\t" + cn[4] + '\t' + NormalCDFVecDistance.scaleFactor3(norm, cn) + '\t' + distCalc.entryDistance(norm[7], cn[7]* NormalCDFVecDistance.scaleFactor3(norm, cn)));
-		int[] cn2 = {2,0,2,0,2,2,2,2,2,2,2,0,2,0,2};
-		System.out.println(distCalc.distance(norm, cn2));
-		System.out.println(norm[4] + "\t" + cn2[4] + '\t' + NormalCDFVecDistance.scaleFactor3(norm, cn2) + '\t' + distCalc.entryDistance(norm[7], cn2[7]* NormalCDFVecDistance.scaleFactor3(norm, cn2)));
+		 dist = new NormalDistribution(58, Math.sqrt(58));
+		System.out.println(dist.cumulativeProbability(55));
+		System.out.println(1-dist.cumulativeProbability(65));
+		
+		 dist = new NormalDistribution(72.5, Math.sqrt(72.5));
+			System.out.println(1-(dist.cumulativeProbability(68.75)+1-dist.cumulativeProbability(81.25)));
 
 	}
 	

@@ -399,7 +399,7 @@ public class TemplateScores {
 		Arrays.sort(myScores);
 		
 		//HashMap<String, String> typeToCopyNumber = Typing.getTypeToCopyNumbers();
-		HashMap<String, int[]> typeCopyNumber = Typing.getTypeCopyNumbers();
+		HashMap<String, int[]> typeCopyNumber = Typing.typeCopyNumbers;
 
 		
 		int indx = 0;
@@ -433,8 +433,8 @@ public class TemplateScores {
 		//Double[] myScores = (Double[]) scoreMap.keySet().toArray();
 		Arrays.sort(myScores);
 		
-		HashMap<String, String> typeToCopyNumber = Typing.getDiploidTypeToCopyNumbers();
-		HashMap<String, int[]> typeCopyNumber = Typing.getDiploidTypeCopyNumbers();
+		//HashMap<String, String> typeToCopyNumber = Typing.diploidTypeToCopyNumbers;
+		HashMap<String, int[]> typeCopyNumber = Typing.diploidTypeCopyNumbers;
 		
 		int indx = 0;
 		for (int i = 0; i < myScores.length; ++i) {

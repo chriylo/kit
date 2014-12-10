@@ -62,7 +62,7 @@ public class TemplateScorer {
 
 		this.templateBarcodes = templateBarcodes;
 		
-		this.distanceCalculator = new NormalCDFVecDistance();
+		this.distanceCalculator = new ZVecDistance();
 		
 	}
 	
